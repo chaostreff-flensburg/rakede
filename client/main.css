@@ -1,1 +1,43 @@
 /* CSS declarations go here */
+
+/* https://coolors.co/app/e54250-f2f2f2-b1d8db-4a7c9e-1f3456 */
+
+body {
+  background-color: #f2f2f2;
+}
+
+/*--- HEADER ---*/
+
+header {
+}
+
+.siteTitle {
+  font-family: "Montserrat", sans-serif;
+  font-size: 2.5em;
+  letter-spacing: 1em;
+  color: #f2f2f2;
+  margin-top: 1em;
+  margin-left: -6em;
+}
+
+@media (max-width: 600px) {
+  .siteTitle {
+    font-size: 1.5em;
+    margin-top: 1.5em;
+    margin-left: 0em;
+  }
+}
+
+.colorbg {
+}
+
+.BGred {
+  position: fixed;
+  height: 275px;
+  background-color: #e54250;
+  width: 120%;
+  top: -175px;
+  left: -50px;
+  transform: rotate(-6deg);
+  z-index: -5;
+}
