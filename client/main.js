@@ -1,6 +1,7 @@
 import { Template } from 'meteor/templating';
 
 // Initialize collapse button
+// http://stackoverflow.com/questions/32439042/materialize-css-side-nav-not-working
 (function($){
   $(function(){
 
