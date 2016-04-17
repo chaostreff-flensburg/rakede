@@ -13,18 +13,25 @@ header {
 
 .siteTitle {
   font-family: "Montserrat", sans-serif;
-  font-size: 2.5em;
-  letter-spacing: 1em;
+  font-size: 2.25em;
+  letter-spacing: 0.6em;
   color: #f2f2f2;
   margin-top: 1em;
-  margin-left: -6em;
+  margin-left: -4em;
 }
 
 @media (max-width: 600px) {
   .siteTitle {
-    font-size: 1.5em;
-    margin-top: 1.5em;
+    font-size: 2em;
+    margin-top: 1.15em;
     margin-left: 0em;
+  }
+}
+
+@media (max-width: 320px) {
+  .siteTitle {
+    margin-top: 1.17em;
+    margin-left: 1.25em;
   }
 }
 
@@ -40,4 +47,42 @@ header {
   left: -50px;
   transform: rotate(-6deg);
   z-index: -5;
+}
+
+/*--- SIDEMENU ---*/
+
+.side-nav {
+  line-height: 1.4em !important;
+}
+
+.button-collapse {
+  position: fixed;
+  top: 24px;
+  margin-left: 14px;
+  padding-left: 2px;
+  font-size: 32px;
+  color: #f2f2f2;
+  z-index: 5;
+}
+
+@media (min-width: 992px) {
+  .button-collapse {
+    display: none;
+  }
+}
+
+nav p {
+  color: black;
+}
+
+/*--- CONTENT ---*/
+
+.content {
+  padding-left: 300px;
+}
+
+@media (max-width: 992px) {
+  .content {
+    padding-left: 0px;
+  }
 }
