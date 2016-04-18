@@ -1,10 +1,10 @@
 import { Template } from 'meteor/templating';
 
-// Initialize collapse button
-// http://stackoverflow.com/questions/32439042/materialize-css-side-nav-not-working
 (function($){
   $(function(){
 
+    // Initialize collapse button
+    // http://stackoverflow.com/questions/32439042/materialize-css-side-nav-not-working
     $('.button-collapse').sideNav({
       menuWidth: 300, // Default is 240
       edge: 'left', // Choose the horizontal origin
