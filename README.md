@@ -12,13 +12,13 @@ Getting up and running is as easy as 1, 2, 3.
 
 1. Make sure you have [NodeJS](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed.
 2. Install your dependencies
-    
+
     ```
     cd path/to/rakede; npm install
     ```
 
 3. Start your app
-    
+
     ```
     npm start
     ```
@@ -46,12 +46,10 @@ For more information on all the things you can do with Feathers visit [docs.feat
 
 ## Changelog
 
-__0.1.0__
+__0.0.0__
 
-- Initial release
+- Nothing to release yet
 
 ## License
-
-Copyright (c) 2015
 
 Licensed under the [MIT license](LICENSE).
