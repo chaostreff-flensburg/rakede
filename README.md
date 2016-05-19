@@ -2,6 +2,11 @@
 
 > intergalactic organization communication
 
+## Getting Started
+
+
+    npm install -g horizon
+    hz serve --dev
 
 
 ## Changelog
