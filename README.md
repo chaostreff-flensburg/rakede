@@ -5,8 +5,7 @@
 ## Getting Started
 
 
-    npm install -g horizon
-    hz serve --dev
+    npm install
 
 
 ## Changelog
