@@ -11,12 +11,12 @@
     "type": "git",
     "url": "https://github.com/roikiermedia/rakede.git"
   },
-  "author": "Thorben Dittmar",
+  "author": "Chaostreff Flensburg e.V.",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/roikiermedia/rakede/issues"
+    "url": "https://github.com/chaostreff-flensburg/rakede/issues"
   },
-  "homepage": "https://github.com/roikiermedia/rakede",
+  "homepage": "https://github.com/chaostreff-flensburg/rakede",
   "private": true,
   "dependencies": {
     "body-parser": "^1.1.2",
