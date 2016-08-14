@@ -43,7 +43,7 @@ app.start = app.listen = function(){
 
 app.get('/', function(req, res) {
   res.render('home', {
-    title: "hello world!"
+    title: "Hello World! Me no know git."
   })
 })
 
