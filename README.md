@@ -6,6 +6,7 @@
 
 
     npm install
+    npm start
 
 
 ## Changelog
