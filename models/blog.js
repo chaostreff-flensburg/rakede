@@ -1,24 +1,52 @@
 var r = require('rethinkdb');
 
 var connection = null;
-r.connect( {host: 'localhost', port: 28015}, function(err, conn) {
+r.connect( {host: 'localhost', port: 28015, db: 'rakede'}, function(err, conn) {
     if (err) throw err;
     connection = conn;
 });
 
+/*  DEFINITION blogEntry
+
+{
+  user_id:  uuid,
+  timestamp: date,
+  title:  string,
+  content:  string,
+  categorie: [uuid]
+}
+
+*/
+
+/*      DEFINITION categorie
+
+{
+  title:  string
+}
+
+*/
+
+/*  TABLES
+
+'blog_posts' =  Blogeinträge
+'blog_categories'  = Kategorien
+
+*/
+
 /*----------------crud controller for blog entries----------*/
 
-exports.createBlogEntry = function(user, data, title, callback) {
+exports.createBlogPost = function(user, content, title, category, callback) {
   //create blog object
-  var blogEntry = {
+  var blogPost = {
     author:   user,
-    data:   data,
+    content:   content,
     title: title,
+    category: category,
     timestamp:  new Date()
   };
 
   //insert blog object into db
-    r.db('rakede').table('blog').insert(blogEntry).run(connection, function(err, result) {
+    r.table('blog_posts').insert(blogPost).run(connection, function(err, result) {
       if (err) throw err;
       console.log(JSON.stringify(result, null, 2));
       callback();
@@ -26,8 +54,54 @@ exports.createBlogEntry = function(user, data, title, callback) {
 };
 
 //get all blog entries
-exports.getAllBlogs = function(callback) {
-    r.db('rakede').table('blog').run(connection, function(err, cursor) {
+exports.getAllPosts = function(callback) {
+    r.table('blog_posts').run(connection, function(err, cursor) {
+      if (err) throw err;
+      cursor.toArray(function(err, result) {
+          if (err) throw err;
+          console.log(JSON.stringify(result, null, 2));
+          callback(result);
+      });
+  });
+};
+
+//update blog post
+exports.updateBlogPost = function(uuid, content, title, callback) {
+  r.table('blog_posts').get(uuid).update({content: content, title: title}).run(connection, function(err, result) {
+    if (err) throw err;
+    console.log(JSON.stringify(result, null, 2));
+    callback();
+  });
+};
+
+//delete blog post
+exports.deleteBlogPost = function(uuid, callback) {
+  r.table('blog_posts').get(uuid).delete().run(connection, function(err, result) {
+    if (err) throw err;
+    console.log(JSON.stringify(result, null, 2));
+    callback();
+  });
+};
+
+/*----------------crud controller for categories----------*/
+
+exports.createCategory = function(title, callback) {
+  //create category object
+  var category = {
+    title:  title
+  };
+
+  //insert category object
+  r.table('blog_categories').insert(category).run(connection, function(err, result) {
+    if (err) throw err;
+    console.log(JSON.stringify(result, null, 2));
+    callback();
+  });
+};
+
+//get all categories
+exports.getAllCategories = function(callback) {
+    r.table('blog_categories').run(connection, function(err, cursor) {
       if (err) throw err;
       cursor.toArray(function(err, result) {
           if (err) throw err;
