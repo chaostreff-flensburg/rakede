@@ -19,6 +19,14 @@ module.exports = () => {
     delimiter: '_'
   };
 
+  var check = 0;
+
+  for (category in db.tables) {
+    for (table in db.tables[category]) {
+      ++check;
+    }
+  }
+
   r.connect( dbconf, (err, conn) => {
     if (err) console.log('ERR: No database connection!');
 
@@ -30,7 +38,9 @@ module.exports = () => {
 
     }).run(connection, () => {
 
-      conn.use(db.name);
+      connection.use(db.name);
+
+      var timeout = false;
 
       for (category in db.tables) {
 
@@ -41,8 +51,10 @@ module.exports = () => {
             return r.branch(exists,true,r.tableCreate(category + db.delimiter + db.tables[category][table]));
 
           }).run(connection);
+
         }
       }
+
     });
   });
 }

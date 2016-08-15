@@ -15,7 +15,8 @@ var express         = require("express"),
     path            = require('path'),
     //r               = require('rethinkdb'),
     sockio          = require("socket.io"),
-    exphbs          = require('express-handlebars');
+    exphbs          = require('express-handlebars'),
+    dbstart         = require('./helpers/dbstart.js');
 
 
 // ====================
@@ -49,6 +50,8 @@ app.start = app.listen = function(){
 // 2...
 // 1..
 // ====================
+
+dbstart();
 
 app.start(PORT);
 console.log("Server showing %s listening at http://%s:%s", publicDir, hostname, PORT);
