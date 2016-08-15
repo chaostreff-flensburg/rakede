@@ -11,9 +11,17 @@ router.get('/', function(req, res) {
 });
 
 router.post('/createBlogPost', function(req, res) {
-  blog.createBlogPost(req.body.author, req.body.content, req.body.title, req.body.category, function() {
+  blog.createPost(req.body.author, req.body.content, req.body.title, req.body.category, function() {
     res.render('home', {
       title: "Blogeintrag angelegt!"
+    });
+  });
+});
+
+router.post('/updateBlogPost', function(req, res) {
+  blog.updatePost(req.body.postID, req.body.content, req.body.title, req.body.category, function() {
+    res.render('home', {
+      title: "Blogeintrag aktualisiert!"
     });
   });
 });

@@ -13,12 +13,12 @@ r.connect( {host: 'localhost', port: 28015, db: 'rakede'}, function(err, conn) {
   timestamp: date,
   title:  string,
   content:  string,
-  categorie: [uuid]
+  category: [uuid]
 }
 
 */
 
-/*      DEFINITION categorie
+/*      DEFINITION category
 
 {
   title:  string
@@ -75,8 +75,8 @@ exports.getPost = function(uuid, callback) {
 };
 
 //update blog post
-exports.updatePost = function(uuid, content, title, callback) {
-  r.table('blog_posts').get(uuid).update({content: content, title: title}).run(connection, function(err, result) {
+exports.updatePost = function(uuid, content, title, category, callback) {
+  r.table('blog_posts').get(uuid).update({content: content, title: title, category: category}).run(connection, function(err, result) {
     if (err) throw err;
     console.log(JSON.stringify(result, null, 2));
     callback();
