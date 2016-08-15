@@ -5,7 +5,7 @@ var blog = require('../models/blog');
 router.get('/', function(req, res) {
   blog.getAllPosts(function(result) {
     res.render('blog', {
-      blogs: result
+      posts: result
     });
   });
 });
