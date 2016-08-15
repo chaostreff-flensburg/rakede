@@ -11,7 +11,7 @@ router.get('/', function(req, res) {
 });
 
 router.post('/createBlogEntry', function(req, res) {
-  blog.createBlogPosts("Thorben der Frameworkterrorist", "Feather.js oder warum wir unsere Zeit öfters mal verschwenden sollten!", function() {
+  blog.createPosts("Thorben der Frameworkterrorist", "Feather.js oder warum wir unsere Zeit öfters mal verschwenden sollten!", function() {
     res.render('home', {
       title: "Blogeintrag angelegt!"
     });

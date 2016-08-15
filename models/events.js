@@ -32,6 +32,96 @@ r.connect( {host: 'localhost', port: 28015, db: 'rakede'}, function(err, conn) {
 
 */
 
-/*----------------crud controller for events----------*/
+/*  TABLES
 
-/*----------------crud controller for signups----------*/
+'events'
+
+*/
+
+/*----------------crud interface for events----------*/
+
+exports.createEvent = function(name, creator, description, time, maxParticipants, callback) {
+  //hange time to reql date
+  time = r.epochTime(time*1000);
+
+  //create event object
+  var eventObject = {
+        name: name,
+        creator: creator,
+        description: description,
+        time: time,
+        maxParticipants: maxParticipants,
+        participants: []
+    };
+
+  //insert event object into db
+    r.table('events').insert(eventObject).run(connection, function(err, result) {
+      if (err) throw err;
+      console.log(JSON.stringify(result, null, 2));
+      callback();
+  });
+};
+
+exports.updateEvent = function(uuid, title, creator, description, time, maxParticipants, callback) {
+  //hange time to reql date
+  time = r.epochTime(time*1000);
+
+  r.table('events').get(uuid).update({
+        name: name,
+        creator: creator,
+        description: description,
+        time: time,
+        maxParticipants: maxParticipants
+    }).run(connection, function(err, result) {
+      if (err) throw err;
+      console.log(JSON.stringify(result, null, 2));
+      callback();
+    });
+};
+
+exports.getAllEvents = function(callback) {
+  r.table('events').run(connection, function(err, cursor) {
+    if (err) throw err;
+    cursor.toArray(function(err, result) {
+        if (err) throw err;
+        console.log(JSON.stringify(result, null, 2));
+        callback(result);
+    });
+  });
+};
+
+exports.deleteEvent = function(uuid, callback) {
+  r.table('events').get(uuid).delete().run(connection, function(err, result) {
+    if (err) throw err;
+    console.log(JSON.stringify(result, null, 2));
+    callback();
+  });
+};
+
+/*-------------crud interface for participants------------------*/
+
+exports.getParticipantsOfEvent = function(uuid, callback) {
+  r.table('events').get(uuid).run(connection, function(err, result) {
+    if (err) throw err;
+    console.log(JSON.stringify(result, null, 2));
+    callback(result.participants);
+  });
+};
+
+//add a new participant with name and email, also flag if email for verification has been sent
+exports.addParticipantToEvent = function(uuid, name, email, email_sent) {
+  //create participant object
+  var participant = {
+      name: name,
+      email:  email,
+      signup: r.now(),
+      email_sent: email_sent,
+      verified: false
+  };
+
+  r.table('events').get(uuid)('participants').append(participant).run(connection, function(err, result) {
+    if (err) throw err;
+    console.log(JSON.stringify(result, null, 2));
+    callback();
+  });
+};

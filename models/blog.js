@@ -42,7 +42,7 @@ exports.createBlogPost = function(user, content, title, category, callback) {
     content:   content,
     title: title,
     category: category,
-    timestamp:  new Date()
+    timestamp:  r.now()
   };
 
   //insert blog object into db
@@ -75,7 +75,7 @@ exports.getPost = function(uuid, callback) {
 };
 
 //update blog post
-exports.updateBlogPost = function(uuid, content, title, callback) {
+exports.updatePost = function(uuid, content, title, callback) {
   r.table('blog_posts').get(uuid).update({content: content, title: title}).run(connection, function(err, result) {
     if (err) throw err;
     console.log(JSON.stringify(result, null, 2));
@@ -84,7 +84,7 @@ exports.updateBlogPost = function(uuid, content, title, callback) {
 };
 
 //delete blog post
-exports.deleteBlogPost = function(uuid, callback) {
+exports.deletePost = function(uuid, callback) {
   r.table('blog_posts').get(uuid).delete().run(connection, function(err, result) {
     if (err) throw err;
     console.log(JSON.stringify(result, null, 2));
