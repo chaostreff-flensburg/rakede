@@ -66,7 +66,7 @@ app.get('/blog', function(req, res) {
 });
 
 app.post('/createBlogEntry', function(req, res) {
-  blog.createBlogEntry("Torben der Frameworkterrorist", "Feather.js oder warum wir unsere Zeit öfters mal verschwenden sollten!", function() {
+  blog.createBlogEntry(body.author, body.text, body.title, function() {
     res.render('home', {
       title: "Blogeintrag angelegt!"
     });
