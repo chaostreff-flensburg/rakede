@@ -65,6 +65,15 @@ exports.getAllPosts = function(callback) {
   });
 };
 
+//get specific blog post
+exports.getPost = function(uuid, callback) {
+    r.table('blog_posts').get(uuid).run(connection, function(err, result) {
+      if (err) throw err;
+      console.log(JSON.stringify(result, null, 2));
+      callback(result);
+  });
+};
+
 //update blog post
 exports.updateBlogPost = function(uuid, content, title, callback) {
   r.table('blog_posts').get(uuid).update({content: content, title: title}).run(connection, function(err, result) {
