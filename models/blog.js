@@ -41,12 +41,12 @@ exports.createBlogPost = function(user, content, title, category, callback) {
     author:   user,
     content:   content,
     title: title,
-    category: category,
+    category: category ? category : null,
     timestamp:  r.now()
   };
 
   //insert blog object into db
-    r.table('blog_posts').insert(blogPost).run(connection, function(err, result) {
+    r.table('blog_posts').insert([blogPost]).run(connection, function(err, result) {
       if (err) throw err;
       console.log(JSON.stringify(result, null, 2));
       callback();
