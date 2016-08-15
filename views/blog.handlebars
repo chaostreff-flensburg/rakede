@@ -1,9 +1,9 @@
 <h1>Blogeinträge</h1>
-{{#if blogs}}
-  {{#each blogs}}
-    <b>Author: </b><p>{{this.author}}</p><br>
-    <b>Titel: </b><p>{{this.title}}</p><br>
-    <b>Eintrag: </b><p>{{this.data}}</p><br>
-           </tr>
+{{#if posts}}
+  {{#each posts}}
+    <h1>{{this.title}}</h1>
+    <p>{{this.content}}</p>
+    <p>Post written by {{this.author}}</p>
+    <hr>
   {{/each}}
 {{/if}}

@@ -15,8 +15,6 @@ var express         = require("express"),
     path            = require('path'),
     //r               = require('rethinkdb'),
     sockio          = require("socket.io"),
-    Client          = require('node-rest-client').Client,
-    client          = new Client(),
     exphbs          = require('express-handlebars');
 
 

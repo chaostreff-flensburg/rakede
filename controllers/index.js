@@ -4,6 +4,7 @@ var router = express.Router();
 //router.use('/comments', require('./comments'))
 //router.use('/users', require('./users'))
 router.use("/blog", require("./blog"));
+router.use("/events", require("./events"));
 
 router.get('/', function(req, res) {
   res.render('home', {

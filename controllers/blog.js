@@ -3,15 +3,15 @@ var router = express.Router();
 var blog = require('../models/blog');
 
 router.get('/', function(req, res) {
-  blog.getAllBlogs(function(result) {
+  blog.getAllPosts(function(result) {
     res.render('blog', {
-      blogs: result
+      posts: result
     });
   });
 });
 
 router.post('/createBlogEntry', function(req, res) {
-  blog.createBlogEntry("Thorben der Frameworkterrorist", "Feather.js oder warum wir unsere Zeit öfters mal verschwenden sollten!", function() {
+  blog.createBlogPost("Thorben der Frameworkterrorist", "Feather.js oder warum wir unsere Zeit öfters mal verschwenden sollten!", function() {
     res.render('home', {
       title: "Blogeintrag angelegt!"
     });
