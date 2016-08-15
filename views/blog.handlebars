@@ -1,0 +1,9 @@
+<h1>Blogeinträge</h1>
+{{#if blogs}}
+  {{#each blogs}}
+    <b>Author: </b><p>{{this.author}}</p><br>
+    <b>Titel: </b><p>{{this.title}}</p><br>
+    <b>Eintrag: </b><p>{{this.data}}</p><br>
+           </tr>
+  {{/each}}
+{{/if}}
