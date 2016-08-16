@@ -7,7 +7,9 @@ var express         = require("express"),
     app             = express(),
     server          = require('http').createServer(app),
     bodyParser      = require('body-parser'),
+    cookieParser    = require('cookie-parser'),
     errorHandler    = require('errorhandler'),
+    passport        = require('passport'),
     methodOverride  = require('method-override'),
     hostname        = process.env.HOSTNAME || 'localhost',
     PORT            = process.env.PORT || 8081,
@@ -16,6 +18,7 @@ var express         = require("express"),
     //r               = require('rethinkdb'),
     sockio          = require("socket.io"),
     exphbs          = require('express-handlebars'),
+    session         = require('express-session'),
     dbstart         = require('./helpers/dbstart.js');
 
 
@@ -31,11 +34,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+app.use(cookieParser);
 app.use(express.static(publicDir));
 app.use(errorHandler({
     dumpExceptions: true,
     showStack: true
 }));
+//requirements for authentification
+app.use(session({ secret: 'wululu' }));
+app.use(passport.initialize());
+app.use(passport.session());
 // require Routes in ./controllers
 app.use(require('./controllers'));
 

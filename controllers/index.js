@@ -12,4 +12,10 @@ router.get('/', function(req, res) {
   });
 });
 
+router.get('/login', function(req, res) {
+  res.render('home', {
+    title: "You're logged in now. Gratz."
+  });
+});
+
 module.exports = router;
