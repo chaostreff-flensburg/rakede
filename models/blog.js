@@ -35,7 +35,7 @@ r.connect( {host: 'localhost', port: 28015, db: 'rakede'}, function(err, conn) {
 
 /*----------------crud controller for blog entries----------*/
 
-exports.createBlogPost = function(user, content, title, category, callback) {
+exports.createPost = function(user, content, title, category, callback) {
   //create blog object
   var blogPost = {
     author:   user,
@@ -59,6 +59,10 @@ exports.getAllPosts = function(callback) {
       if (err) throw err;
       cursor.toArray(function(err, result) {
           if (err) throw err;
+          //convert time to unixEpoch
+          result.forEach((e, i, a) => {
+            e.timestamp = r.toEpochTime(e.timestamp) / 1000;
+          });
           console.log(JSON.stringify(result, null, 2));
           callback(result);
       });
@@ -69,6 +73,8 @@ exports.getAllPosts = function(callback) {
 exports.getPost = function(uuid, callback) {
     r.table('blog_posts').get(uuid).run(connection, function(err, result) {
       if (err) throw err;
+      //convert timestamp to unixEpoch
+      result.timestamp = r.toEpochTime(result.timestamp) / 1000;
       console.log(JSON.stringify(result, null, 2));
       callback(result);
   });

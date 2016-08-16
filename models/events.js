@@ -23,6 +23,7 @@ r.connect( {host: 'localhost', port: 28015, db: 'rakede'}, function(err, conn) {
 /*      DEFINITION participant
 
 {
+  id:   uuid (to be added manually!),
   name: string,
   email:  string,
   email_sent: boolean,
@@ -84,6 +85,10 @@ exports.getAllEvents = function(callback) {
     if (err) throw err;
     cursor.toArray(function(err, result) {
         if (err) throw err;
+        //convert time to unixEpoch
+        result.forEach((e, i, a) => {
+          e.timestamp = r.toEpochTime(e.timestamp) / 1000;
+        });
         console.log(JSON.stringify(result, null, 2));
         callback(result);
     });
@@ -112,6 +117,7 @@ exports.getParticipantsOfEvent = function(uuid, callback) {
 exports.addParticipantToEvent = function(uuid, name, email, email_sent) {
   //create participant object
   var participant = {
+      id: r.uuid(),
       name: name,
       email:  email,
       signup: r.now(),

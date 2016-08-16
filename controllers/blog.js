@@ -26,4 +26,12 @@ router.post('/updateBlogPost', function(req, res) {
   });
 });
 
+router.post('/deleteBlogPost', function(req, res) {
+  blog.deletePost(req.body.postID, function() {
+    res.render('home', {
+      title: "Blogeintrag gelöscht!"
+    });
+  });
+});
+
 module.exports = router;
