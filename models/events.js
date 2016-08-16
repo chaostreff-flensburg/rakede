@@ -34,7 +34,7 @@ r.connect( {host: 'localhost', port: 28015, db: 'rakede'}, function(err, conn) {
 
 /*  TABLES
 
-'events'
+'events_events'
 
 */
 
@@ -55,7 +55,7 @@ exports.createEvent = function(name, creator, description, time, maxParticipants
     };
 
   //insert event object into db
-    r.table('events').insert(eventObject).run(connection, function(err, result) {
+    r.table('events_events').insert(eventObject).run(connection, function(err, result) {
       if (err) throw err;
       console.log(JSON.stringify(result, null, 2));
       callback();
@@ -66,7 +66,7 @@ exports.updateEvent = function(uuid, title, creator, description, time, maxParti
   //hange time to reql date
   time = r.epochTime(time*1000);
 
-  r.table('events').get(uuid).update({
+  r.table('events_events').get(uuid).update({
         name: name,
         creator: creator,
         description: description,
@@ -80,7 +80,7 @@ exports.updateEvent = function(uuid, title, creator, description, time, maxParti
 };
 
 exports.getAllEvents = function(callback) {
-  r.table('events').run(connection, function(err, cursor) {
+  r.table('events_events').run(connection, function(err, cursor) {
     if (err) throw err;
     cursor.toArray(function(err, result) {
         if (err) throw err;
@@ -91,7 +91,7 @@ exports.getAllEvents = function(callback) {
 };
 
 exports.deleteEvent = function(uuid, callback) {
-  r.table('events').get(uuid).delete().run(connection, function(err, result) {
+  r.table('events_events').get(uuid).delete().run(connection, function(err, result) {
     if (err) throw err;
     console.log(JSON.stringify(result, null, 2));
     callback();
@@ -101,7 +101,7 @@ exports.deleteEvent = function(uuid, callback) {
 /*-------------crud interface for participants------------------*/
 
 exports.getParticipantsOfEvent = function(uuid, callback) {
-  r.table('events').get(uuid).run(connection, function(err, result) {
+  r.table('events_events').get(uuid).run(connection, function(err, result) {
     if (err) throw err;
     console.log(JSON.stringify(result, null, 2));
     callback(result.participants);
@@ -119,7 +119,7 @@ exports.addParticipantToEvent = function(uuid, name, email, email_sent) {
       verified: false
   };
 
-  r.table('events').get(uuid)('participants').append(participant).run(connection, function(err, result) {
+  r.table('events_events').get(uuid)('participants').append(participant).run(connection, function(err, result) {
     if (err) throw err;
     console.log(JSON.stringify(result, null, 2));
     callback();

@@ -14,7 +14,7 @@ module.exports = () => {
     tables: {
       blog: ['posts', 'categories'],
       cms: ['sites', 'menu'],
-      events: ['participant', 'event', 'user']
+      events: ['events']
     },
     delimiter: '_'
   };
