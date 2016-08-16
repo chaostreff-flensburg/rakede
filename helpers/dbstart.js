@@ -36,7 +36,7 @@ module.exports = () => {
 
         }, function(err) {
           if (err) {
-            console.log('Database setup failed!');
+            console.log('ERR: Database setup failed!');
           } else {
             callback();
           }
@@ -44,7 +44,7 @@ module.exports = () => {
 
       }, function(err) {
         if (err) {
-          console.log('Database setup failed!');
+          console.log('ERR: Database setup failed!');
         } else {
           console.log('Database ready!');
           connection.close();
