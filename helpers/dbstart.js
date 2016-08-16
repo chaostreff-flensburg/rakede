@@ -1,4 +1,5 @@
 const r = require('rethinkdb');
+const chron = require('async');
 
 module.exports = () => {
 
@@ -40,21 +41,34 @@ module.exports = () => {
 
       connection.use(db.name);
 
-      var timeout = false;
+      chron.forEachOf(db.tables, (tables, category, callback) => {
 
-      for (category in db.tables) {
+        chron.forEachOf(tables, (table, index, callback) => {
 
-        for (table in db.tables[category]) {
+          r.db(db.name).tableList().contains(category + db.delimiter + table).do(exists => {
 
-          r.db(db.name).tableList().contains(category + db.delimiter + db.tables[category][table]).do(exists => {
+            return r.branch(exists,true,r.tableCreate(category + db.delimiter + table));
 
-            return r.branch(exists,true,r.tableCreate(category + db.delimiter + db.tables[category][table]));
+          }).run(connection, () => {
+              callback();
+          });
 
-          }).run(connection);
+        }, function(err) {
+          if (err) {
+            console.log('Database setup failed!');
+          } else {
+            callback();
+          }
+        });
 
+      }, function(err) {
+        if (err) {
+          console.log('Database setup failed!');
+        } else {
+          console.log('Database ready!');
+          connection.close();
         }
-      }
-
+      });
     });
   });
 }
