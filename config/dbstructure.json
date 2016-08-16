@@ -1,0 +1,9 @@
+{
+  "name": "rakede",
+  "tables": {
+    "blog": ["posts", "categories"],
+    "cms": ["sites", "menu"],
+    "events": ["events"]
+  },
+  "delimiter": "_"
+}
