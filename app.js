@@ -16,7 +16,6 @@ var express         = require("express"),
     PORT            = process.env.PORT || 8081,
     publicDir       = process.argv[2] || __dirname + '/public',
     path            = require('path'),
-    //r               = require('rethinkdb'),
     sockio          = require("socket.io"),
     exphbs          = require('express-handlebars'),
     session         = require('express-session'),
@@ -35,33 +34,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-//app.use(cookieParser);
 app.use(express.static(publicDir));
 app.use(errorHandler({
     dumpExceptions: true,
     showStack: true
 }));
-/*
-//requirements for authentification
-app.use(session({
-    secret: 'wululu',
-    name:   'session_cookie',
-    resave: false,
-    saveUninitialized:  false
- }));
-app.use(passport.initialize());
-app.use(passport.session());
-passport.use(new slackStrategy({
-    //clientID: CLIENT_ID,
-    //clientSecret: CLIENT_SECRET
-  },
-  function(accessToken, refreshToken, profile, done) {
-    User.findOrCreate({ SlackId: profile.id }, function (err, user) {
-      return done(err, user);
-    });
-  }
-));
-*/
 // require Routes in ./controllers
 app.use(require('./controllers'));
 
