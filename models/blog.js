@@ -10,9 +10,9 @@ r.connect( {host: 'localhost', port: 28015, db: 'rakede'}, function(err, conn) {
 
 {
   user_id:  uuid,
-  slug: string,
+  slug: slug string,
   timestamp: date,
-  title: slug string,
+  title: string,
   content:  string,
   category: [uuid]
 }
@@ -42,6 +42,7 @@ exports.createPost = function(user, content, title, category, callback) {
     author:   user,
     content:   content,
     title: title,
+    slug: slug(title),
     category: category ? category : null,
     timestamp:  r.now()
   };
@@ -70,9 +71,9 @@ exports.getAllPosts = function(callback) {
   });
 };
 
-//get specific blog post
-exports.getPost = function(uuid, callback) {
-    r.table('blog_posts').get(uuid).run(connection, function(err, result) {
+//get specific blog post via slug
+exports.getPost = function(slug, callback) {
+    r.table('blog_posts').filter(r.row('slug').eq(slug)).run(connection, function(err, result) {
       if (err) throw err;
       //convert timestamp to unixEpoch
       result.timestamp = r.toEpochTime(result.timestamp) / 1000;
@@ -83,7 +84,7 @@ exports.getPost = function(uuid, callback) {
 
 //update blog post
 exports.updatePost = function(uuid, content, title, category, callback) {
-  r.table('blog_posts').get(uuid).update({content: content, title: title, category: category}).run(connection, function(err, result) {
+  r.table('blog_posts').get(uuid).update({content: content, title: title, category: category, slug: slug(title)}).run(connection, function(err, result) {
     if (err) throw err;
     console.log(JSON.stringify(result, null, 2));
     callback();

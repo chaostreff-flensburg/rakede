@@ -17,6 +17,21 @@ router.get('/', function(req, res) {
   });
 });
 
+/* Route: /(slug)
+Request:
+  slug: slug-string
+Response:
+200: {blogpost},
+404: no post/ fetching post failed
+*/
+router.get('/:slug', function(req, res) {
+  blog.getPost(slug, function(result) {
+    res.render('blog', {
+      posts: result
+    });
+  });
+});
+
 /* Route: Create Blog Post
 Request:
 author: uuid,
