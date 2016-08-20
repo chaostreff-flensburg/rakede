@@ -10,6 +10,7 @@ var express         = require("express"),
     cookieParser    = require('cookie-parser'),
     errorHandler    = require('errorhandler'),
     passport        = require('passport'),
+    slackStrategy   = require('passport-slack').Strategy,
     methodOverride  = require('method-override'),
     hostname        = process.env.HOSTNAME || 'localhost',
     PORT            = process.env.PORT || 8081,
@@ -41,9 +42,24 @@ app.use(errorHandler({
     showStack: true
 }));
 //requirements for authentification
-app.use(session({ secret: 'wululu' }));
+app.use(session({
+    secret: 'wululu',
+    name:   'session_cookie',
+    resave: false,
+    saveUninitialized:  false
+ }));
 app.use(passport.initialize());
 app.use(passport.session());
+passport.use(new slackStrategy({
+    //clientID: CLIENT_ID,
+    //clientSecret: CLIENT_SECRET
+  },
+  function(accessToken, refreshToken, profile, done) {
+    User.findOrCreate({ SlackId: profile.id }, function (err, user) {
+      return done(err, user);
+    });
+  }
+));
 // require Routes in ./controllers
 app.use(require('./controllers'));
 

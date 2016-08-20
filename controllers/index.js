@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var passport = require('passport');
 
 //router.use('/comments', require('./comments'))
 //router.use('/users', require('./users'))
@@ -12,10 +13,14 @@ router.get('/', function(req, res) {
   });
 });
 
-router.get('/login', function(req, res) {
-  res.render('home', {
-    title: "You're logged in now. Gratz."
-  });
+router.get('/login',
+  passport.authorize('slack'));
+
+  router.get('/login/callback',
+    passport.authorize('slack', { failureRedirect: '/login' }),
+    function(req, res) {
+      // Successful authentication, redirect home.
+      res.redirect('/');
 });
 
 module.exports = router;

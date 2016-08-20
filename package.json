@@ -26,6 +26,7 @@
     "express-handlebars": "^3.0.0",
     "express-session": "^1.14.0",
     "passport": "^0.3.2",
+    "passport-slack": "^0.0.6",
     "lodash": "^4.1.0",
     "method-override": "^1.0.0",
     "moment": "^2.11.1",
