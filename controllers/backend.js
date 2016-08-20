@@ -18,8 +18,12 @@ router.get('/newPost', function(req, res) {
 
 router.post('/newPost', function(req, res) {
   var post = {
-    
+    author: "dev",
+    title: req.body.title,
+    content: req.body.content
   };
+
+  blog.createPost(post.author, post.content, post.title);
 
   res.render('backend/newBlogPost', {
     title: "Submitted!"
