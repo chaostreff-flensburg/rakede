@@ -10,8 +10,9 @@ r.connect( {host: 'localhost', port: 28015, db: 'rakede'}, function(err, conn) {
 
 {
   user_id:  uuid,
+  slug: string,
   timestamp: date,
-  title:  string,
+  title: slug string,
   content:  string,
   category: [uuid]
 }
