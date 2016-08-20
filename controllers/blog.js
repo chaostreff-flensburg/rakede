@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var blog = require('../models/blog');
-var slug = require('slug');
 
 /* Route: / (fetch all blog posts)
 Request:

@@ -1,4 +1,5 @@
 var r = require('rethinkdb');
+var slug = require('slug');
 
 var connection = null;
 
