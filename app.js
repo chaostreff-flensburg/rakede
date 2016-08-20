@@ -35,12 +35,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-app.use(cookieParser);
+//app.use(cookieParser);
 app.use(express.static(publicDir));
 app.use(errorHandler({
     dumpExceptions: true,
     showStack: true
 }));
+/*
 //requirements for authentification
 app.use(session({
     secret: 'wululu',
@@ -60,6 +61,7 @@ passport.use(new slackStrategy({
     });
   }
 ));
+*/
 // require Routes in ./controllers
 app.use(require('./controllers'));
 
@@ -67,6 +69,8 @@ app.start = app.listen = function(){
     return server.listen.apply(server, arguments);
 };
 
+// Helpers
+dbstart();
 
 // ====================
 // Start the Rakede
@@ -74,8 +78,6 @@ app.start = app.listen = function(){
 // 2...
 // 1..
 // ====================
-
-dbstart();
 
 app.start(PORT);
 console.log("Server showing %s listening at http://%s:%s", publicDir, hostname, PORT);

@@ -1,9 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var passport = require('passport');
+//var passport = require('passport');
 
-//router.use('/comments', require('./comments'))
-//router.use('/users', require('./users'))
 router.use("/blog", require("./blog"));
 router.use("/events", require("./events"));
 
@@ -13,6 +11,7 @@ router.get('/', function(req, res) {
   });
 });
 
+/*
 router.get('/login',
   passport.authorize('slack'));
 
@@ -22,5 +21,6 @@ router.get('/login',
       // Successful authentication, redirect home.
       res.redirect('/');
 });
+*/
 
 module.exports = router;
