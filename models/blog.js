@@ -1,6 +1,9 @@
 var r = require('rethinkdb');
 
 var connection = null;
+
+// database connection is still open
+
 r.connect( {host: 'localhost', port: 28015, db: 'rakede'}, function(err, conn) {
     if (err) throw err;
     connection = conn;
