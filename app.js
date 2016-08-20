@@ -67,6 +67,8 @@ app.start = app.listen = function(){
     return server.listen.apply(server, arguments);
 };
 
+// Helpers
+dbstart();
 
 // ====================
 // Start the Rakede
@@ -74,8 +76,6 @@ app.start = app.listen = function(){
 // 2...
 // 1..
 // ====================
-
-dbstart();
 
 app.start(PORT);
 console.log("Server showing %s listening at http://%s:%s", publicDir, hostname, PORT);
