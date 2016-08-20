@@ -1,0 +1,14 @@
+<h1>Create new Post</h1>
+
+<form method="post">
+  <textarea name="title" rows="1" cols="50">Posttitle</textarea>
+  <textarea name="content" id="content">This is a TinyMCE-Editor. Nice.</textarea>
+  <button type="button" name="Submit" type="submit">Submit</button>
+</form>
+
+<script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
+<script>
+tinymce.init({
+  selector: '#content'
+});
+</script>
