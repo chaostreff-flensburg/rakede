@@ -1,5 +1,29 @@
-<h1>{{title}}</h1>
-
-{{#if title}}
-  {{> greeting}}
-{{/if}}
+<div id="header"></div>
+<div id="menu"></div>
+<div id="about"></div>
+<div id="news">
+  {{#if posts}}
+    {{#each posts}}
+      <h1>{{this.title}}</h1>
+      <p>{{this.content}}</p>
+      <p>Post written by {{this.author}}</p>
+      <hr>
+    {{/each}}
+  {{else}}
+    <h1>No posts</h1>
+  {{/if}}
+</div>
+<div id="events">
+  {{#if events}}
+    {{#each posts}}
+      <h1>{{this.title}}</h1>
+      <p>{{this.content}}</p>
+      <p>Offered by {{this.author}}</p>
+      <hr>
+    {{/each}}
+  {{else}}
+    <h1>No events</h1>
+  {{/if}}
+</div>
+<div id="contact"></div>
+<div id="footer"></div>

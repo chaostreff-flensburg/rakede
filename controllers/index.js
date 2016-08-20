@@ -6,9 +6,13 @@ router.use("/events", require("./events"));
 router.use("/rakede", require("./backend"));
 
 router.get('/', function(req, res) {
-  res.render('home', {
-    title: "Hello World!"
-  });
+
+  var object = {
+    events: [], // event objects in this array
+    posts: []   // blog post objects in this array
+  };
+
+  res.render('home', object);
 });
 
 module.exports = router;
