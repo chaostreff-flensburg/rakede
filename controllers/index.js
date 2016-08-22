@@ -21,21 +21,24 @@ router.get('/', function(req, res) {
       });
     },
     (data, callback) => {
-      blogs.getNewPosts((posts) => {
+      blogs.getNewPosts(1, (posts) => {
         data.posts = posts;
         callback(null, data);
       });
     },
     (data, callback) => {
-      events.getNewEvents((events) => {
+      events.getNewEvents(3, (events) => {
         data.events = events;
         callback(null, data);
       });
     }
   ], (err, result) => {
     if (err) res.end(500);
+
     res.render('home', data);
+
   });
+  
 });
 
 module.exports = router;
