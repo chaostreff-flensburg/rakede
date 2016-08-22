@@ -50,7 +50,7 @@ exports.createSite = function(title, content, callback) {
   };
 
   //insert blog object into db
-    r.table('cms_site').insert([site]).run(connection, function(err, result) {
+    r.table('cms_sites').insert([site]).run(connection, function(err, result) {
       if (err) throw err;
       console.log(JSON.stringify(result, null, 2));
       callback();
@@ -59,7 +59,7 @@ exports.createSite = function(title, content, callback) {
 
 //get specific site via slug
 exports.getSite = function(slug, callback) {
-    r.table('cms_site').get(slug).run(connection, function(err, result) {
+    r.table('cms_sites').get(slug).run(connection, function(err, result) {
       if (err) throw err;
       console.log(JSON.stringify(result, null, 2));
       callback(result);
@@ -68,7 +68,7 @@ exports.getSite = function(slug, callback) {
 
 //update site
 exports.updatePost = function(slug, title, content, callback) {
-  r.table('cms_site').get(slug).update({content: content, title: title, slug: slug(title)}).run(connection, function(err, result) {
+  r.table('cms_sites').get(slug).update({content: content, title: title, slug: slug(title)}).run(connection, function(err, result) {
     if (err) throw err;
     console.log(JSON.stringify(result, null, 2));
     callback();
@@ -77,7 +77,7 @@ exports.updatePost = function(slug, title, content, callback) {
 
 //delete site
 exports.deleteSite = function(slug, callback) {
-  r.table('cms_site').get(slug).delete().run(connection, function(err, result) {
+  r.table('cms_sites').get(slug).delete().run(connection, function(err, result) {
     if (err) throw err;
     console.log(JSON.stringify(result, null, 2));
     callback();
