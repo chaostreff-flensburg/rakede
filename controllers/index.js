@@ -1,5 +1,8 @@
 var express = require('express');
 var router = express.Router();
+var cms = require('../models/cms');
+var blog = require('../models/blog');
+var events = require('../models/events');
 
 router.use("/blog", require("./blog"));
 router.use("/events", require("./events"));
@@ -7,12 +10,31 @@ router.use("/rakede", require("./backend"));
 
 router.get('/', function(req, res) {
 
-  var object = {
-    events: [], // event objects in this array
-    posts: []   // blog post objects in this array
-  };
+  var data = {};
 
-  res.render('home', object);
+  async.waterfall([
+    (callback) => {
+      cms.getMenu((menu) => {
+        data.menu = menu;
+        callback(null, data);
+      });
+    },
+    (data, callback) => {
+      blogs.getNewPosts((posts) => {
+        data.posts = posts;
+        callback(null, data);
+      });
+    },
+    (data, callback) => {
+      events.getNewEvents((events) => {
+        data.events = events;
+        callback(null, data);
+      });
+    }
+  ], (err, result) => {
+    if (err) res.end(500);
+    res.render('home', data);
+  });
 });
 
 module.exports = router;
