@@ -43,7 +43,7 @@ r.connect( {host: 'localhost', port: 28015, db: 'rakede'}, function(err, conn) {
 
 exports.createEvent = function(name, creator, description, time, maxParticipants, callback) {
   //hange time to reql date
-  time = r.epochTime(time*1000);
+  time = r.epochTime(time);
 
   //create event object
   var eventObject = {

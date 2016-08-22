@@ -22,10 +22,12 @@ r.connect( {host: 'localhost', port: 28015, db: 'rakede'}, function(err, conn) {
 {
   title: string,
   site: slug-string.
-  submenu: {
-    title: string,
-    slug: slug string
-  }
+  submenu: [
+    {
+      title: string,
+      slug: slug string
+    }
+  ]
 }
 
 */
@@ -114,6 +116,7 @@ exports.createSubMenuPoint = function(title, callback) {
     callback();
   });
 };
+
 
 //get all menu points
 exports.getMenu = function(callback) {

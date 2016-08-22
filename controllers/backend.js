@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var moment = require("moment");
 // require all modells
 var blog = require('../models/blog');
 var events = require('../models/events');
@@ -10,6 +11,8 @@ router.get('/', function(req, res) {
   });
 });
 
+
+// Blogpost
 router.get('/newPost', function(req, res) {
   res.render('backend/newBlogPost', {
     title: "möp!"
@@ -54,6 +57,7 @@ router.post('/updatePost', function(req, res) {
   });
 });
 
+<<<<<<< HEAD
 /* Route: Delete Blog Post
 Request:
 postID: uuid
@@ -68,6 +72,34 @@ router.post('/deletePost', function(req, res) {
       title: "Blogeintrag gelöscht!"
     });
   });
+=======
+
+// Events
+router.get('/newEvent', function(req, res) {
+  res.render('backend/newEvent', {
+    title: "möp!"
+  });
+});
+
+router.post('/newEvent', function(req, res) {
+
+  var timestamp = moment(req.body.hour+"-"+req.body.minute+"-"+req.body.day+"-"+req.body.month+"-"+req.body.year, "HH-mm-DD-MM-YYYY").unix();
+
+  var postedEvent = {
+    author: "dev",
+    title: req.body.title,
+    content: req.body.content,
+    date: timestamp,
+    maxParticipants: req.body.maxParticipants
+  };
+
+  events.createEvent(postedEvent.title, postedEvent.author, postedEvent.content, postedEvent.date, postedEvent.maxParticipants, function() {
+    res.render('backend/newEvent', {
+      title: "Submitted!"
+    });
+  });
+
+>>>>>>> c007d5527f1b0a87cacd8bc1afa2a9b809556e23
 });
 
 
