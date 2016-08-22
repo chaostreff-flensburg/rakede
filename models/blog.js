@@ -50,7 +50,6 @@ exports.createPost = function(user, content, title, category, callback) {
     category: category ? category : null,
     timestamp:  r.now()
   };
-
   //insert blog object into db
     r.table('blog_posts').insert([blogPost]).run(connection, function(err, result) {
       if (err) throw err;

@@ -105,6 +105,21 @@ exports.getAllEvents = function(callback) {
   });
 };
 
+exports.getNewEvents = function(amount, callback) {
+  r.table('events_events').orderBy('timestamp').limit(amount).run(connection, function(err, cursor) {
+    if (err) throw err;
+    cursor.toArray(function(err, result) {
+        if (err) throw err;
+        //convert time to unixEpoch
+        result.forEach((e, i, a) => {
+          e.timestamp = r.toEpochTime(e.timestamp) / 1000;
+        });
+        console.log(JSON.stringify(result, null, 2));
+        callback(result);
+    });
+  });
+};
+
 exports.deleteEvent = function(uuid, callback) {
   r.table('events_events').get(uuid).delete().run(connection, function(err, result) {
     if (err) throw err;
@@ -138,6 +153,6 @@ exports.addParticipantToEvent = function(uuid, name, email, email_sent) {
   r.table('events_events').get(uuid)('participants').append(participant).run(connection, function(err, result) {
     if (err) throw err;
     console.log(JSON.stringify(result, null, 2));
-    callback();
+    callback(participant.id);
   });
 };
