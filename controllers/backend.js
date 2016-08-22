@@ -4,6 +4,7 @@ var moment = require("moment");
 // require all modells
 var blog = require('../models/blog');
 var events = require('../models/events');
+var cms = require('../models/cms');
 
 router.get('/', function(req, res) {
     res.render('backend/dashboard', {
@@ -99,5 +100,20 @@ router.post('/newEvent', function(req, res) {
     });
 });
 
+
+// CMS
+router.get('/newSite', function(req, res) {
+  res.render('backend/newSite', {
+    title: "möp!"
+  });
+});
+
+router.post('/newSite', function(req, res) {
+  cms.createSite(req.body.title, req.body.content, function() {
+    res.render('backend/newSite', {
+        title: "Submitted!"
+    });
+  });
+});
 
 module.exports = router;
