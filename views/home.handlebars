@@ -33,9 +33,10 @@
 <div id="events">
   {{#if events}}
     {{#each events}}
-      <h1>{{this.title}}</h1>
-      <p>Offered by {{this.author}}</p>
+      <h1>{{this.name}}</h1>
       {{{this.description}}}
+      <p>max {{this.maxParticipants}} participants</p>
+      <p>Offered by {{this.creator}} @ {{this.time}}</p>
       <hr>
     {{/each}}
   {{else}}
