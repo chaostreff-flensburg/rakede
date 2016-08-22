@@ -91,6 +91,12 @@ router.post('/newEvent', function(req, res) {
         date: timestamp,
         maxParticipants: req.body.maxParticipants
     };
+
+    events.createEvent(postedEvent.title, postedEvent.author, postedEvent.content, postedEvent.date, postedEvent.maxParticipants, function() {
+        res.render('backend/newEvent', {
+            title: "Submitted!"
+        });
+    });
 });
 
 
