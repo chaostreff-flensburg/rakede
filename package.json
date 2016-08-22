@@ -27,13 +27,13 @@
     "express-session": "^1.14.0",
     "lodash": "^4.1.0",
     "method-override": "^1.0.0",
-    "moment": "^2.11.1",
+    "moment": "^2.14.1",
     "nodemailer": "^2.5.0",
     "passport": "^0.3.2",
     "passport-slack": "^0.0.6",
     "rethinkdb": "^2.2.1",
-    "socket.io": "^1.4.5",
-    "slug": "^0.9.1"
+    "slug": "^0.9.1",
+    "socket.io": "^1.4.5"
   },
   "devDependencies": {
     "nodemon": "^1.10.0"
