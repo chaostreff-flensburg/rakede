@@ -81,24 +81,18 @@ exports.updateEvent = function(uuid, title, creator, description, time, maxParti
 };
 
 exports.getEvent = function(uuid, callback) {
-  r.table('events_events').get(uuid).run(connection, function(err, result) {
+  r.table('events_events').get(uuid).merge({time: r.row('time').toEpochTime()}).run(connection, function(err, result) {
     if (err) throw err;
-    //convert time to unixEpoch
-    result.time = result.toEpochTime(e.time) / 1000;
     console.log(JSON.stringify(result, null, 2));
     callback(result);
   });
 };
 
 exports.getAllEvents = function(callback) {
-  r.table('events_events').run(connection, function(err, cursor) {
+  r.table('events_events').merge({time: r.row('time').toEpochTime()}).run(connection, function(err, cursor) {
     if (err) throw err;
     cursor.toArray(function(err, result) {
         if (err) throw err;
-        //convert time to unixEpoch
-        result.forEach((e, i, a) => {
-          e.time = r.toEpochTime(e.time) / 1000;
-        });
         console.log(JSON.stringify(result, null, 2));
         callback(result);
     });
@@ -106,18 +100,14 @@ exports.getAllEvents = function(callback) {
 };
 
 exports.getNewEvents = function(amount, callback) {
-  r.table('events_events').orderBy('timestamp').limit(amount).run(connection, function(err, cursor) {
+  r.table('events_events').orderBy('time').limit(amount).merge({time: r.row('time').toEpochTime()}).run(connection, function(err, cursor) {
     if (err) throw err;
     cursor.toArray(function(err, result) {
         if (err) throw err;
-        //convert time to unixEpoch
-        result.forEach((e, i, a) => {
-          e.time = r.toEpochTime(e.time) / 1000;
-        });
         console.log(JSON.stringify(result, null, 2));
         callback(result);
+      });
     });
-  });
 };
 
 exports.deleteEvent = function(uuid, callback) {

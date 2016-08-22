@@ -48,7 +48,7 @@ exports.createPost = function(user, content, title, category, callback) {
     title: title,
     slug: slug(title),
     category: category ? category : null,
-    timestamp:  r.now()
+    time:  r.now()
   };
   //insert blog object into db
     r.table('blog_posts').insert([blogPost]).run(connection, function(err, result) {
@@ -60,14 +60,10 @@ exports.createPost = function(user, content, title, category, callback) {
 
 //get all blog entries
 exports.getAllPosts = function(callback) {
-    r.table('blog_posts').run(connection, function(err, cursor) {
+    r.table('blog_posts').merge({time: r.row('time').toEpochTime()}).run(connection, function(err, cursor) {
       if (err) throw err;
       cursor.toArray(function(err, result) {
           if (err) throw err;
-          //convert time to unixEpoch
-          result.forEach((e, i, a) => {
-            e.timestamp = r.toEpochTime(e.timestamp) / 1000;
-          });
           console.log(JSON.stringify(result, null, 2));
           callback(result);
       });
@@ -76,10 +72,8 @@ exports.getAllPosts = function(callback) {
 
 //get specific blog post via slug
 exports.getPost = function(slug, callback) {
-    r.table('blog_posts').filter(r.row('slug').eq(slug)).run(connection, function(err, result) {
+    r.table('blog_posts').filter(r.row('slug').eq(slug)).merge({time: r.row('time').toEpochTime()}).run(connection, function(err, result) {
       if (err) throw err;
-      //convert timestamp to unixEpoch
-      result.timestamp = r.toEpochTime(result.timestamp) / 1000;
       console.log(JSON.stringify(result, null, 2));
       callback(result);
   });
@@ -88,15 +82,15 @@ exports.getPost = function(slug, callback) {
 //get post by the following criteria: amount and age, order by age
 exports.getNewPosts = function(amount, callback) {
   amount = amount || 1;
-  r.table('blog_posts').orderBy('timestamp').limit(amount).run(connection, function(err, cursor) {
+  r.table('blog_posts').orderBy('time').limit(amount).merge({time: r.row('time').toEpochTime()}).run(connection, function(err, cursor) {
     if (err) throw err;
     cursor.toArray(function(err, result) {
         if (err) throw err;
+        console.log(JSON.stringify(result, null, 2));
         //convert time to unixEpoch
         /*result.forEach((e, i, a) => {
-          e.timestamp = r.toEpochTime(e.timestamp) / 1000;
+          e.time = getTime(e.time) / 1000;
         });*/
-        console.log(JSON.stringify(result, null, 2));
         callback(result);
     });
   });
