@@ -158,10 +158,9 @@ exports.addParticipantToEvent = function(uuid, name, email, email_sent) {
 };
 
 exports.updateParticipant = function(event, uuid, email_sent, verified) {
-  r.table('events_events').get(event)('participants').filter({id: uuid}).run(connection, function(err, result) {
+  r.table('events_events').get(event)('participants').filter({id: uuid}).update({email_sent: email_sent, verified: verified}).run(connection, function(err, result) {
     if (err) throw err;
     console.log(JSON.stringify(result, null, 2));
-    //result.emailS
-    callback(participant.id);
+    callback();
   });
 };

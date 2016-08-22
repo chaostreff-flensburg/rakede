@@ -89,9 +89,13 @@ router.post('/signup', function(req, res) {
                     else {
                       mailSent = true;
                       //update mailSent flag of participant
-                      
+                      events.updateParticipant(event.id, uuid, mailSent, false, function() {
+
+                      });
                     }
                 });
+                //success
+                res.end(200);
             });
             //save new participant
         } else {
