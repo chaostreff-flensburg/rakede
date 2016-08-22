@@ -33,7 +33,6 @@
     "passport-slack": "^0.0.6",
     "rethinkdb": "^2.2.1",
     "socket.io": "^1.4.5",
-    "tinymce": "^4.4.1",
     "slug": "^0.9.1"
   },
   "devDependencies": {
