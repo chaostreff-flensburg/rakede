@@ -6,17 +6,17 @@ var blog = require('../models/blog');
 var events = require('../models/events');
 
 router.get('/', function(req, res) {
-  res.render('backend/dashboard', {
-    title: "möp!"
-  });
+    res.render('backend/dashboard', {
+        title: "möp!"
+    });
 });
 
 
 // Blogpost
 router.get('/newPost', function(req, res) {
-  res.render('backend/newBlogPost', {
-    title: "möp!"
-  });
+    res.render('backend/newBlogPost', {
+        title: "möp!"
+    });
 });
 
 /* Route: Create Blog Post
@@ -31,11 +31,11 @@ Response:
 404: creating failed
 */
 router.post('/newPost', function(req, res) {
-  blog.createPost(req.body.author, req.body.content, req.body.title, req.body.category, function() {
-    res.render('backend/newBlogPost', {
-      title: "Submitted!"
+    blog.createPost(req.body.author, req.body.content, req.body.title, req.body.category, function() {
+        res.render('backend/newBlogPost', {
+            title: "Submitted!"
+        });
     });
-  });
 });
 
 /* Route: Update Blog Post
@@ -50,14 +50,13 @@ Response:
 404: updating failed
 */
 router.post('/updatePost', function(req, res) {
-  blog.updatePost(req.body.postID, req.body.content, req.body.title, req.body.category, function() {
-    res.render('home', {
-      title: "Blogeintrag aktualisiert!"
+    blog.updatePost(req.body.postID, req.body.content, req.body.title, req.body.category, function() {
+        res.render('home', {
+            title: "Blogeintrag aktualisiert!"
+        });
     });
-  });
 });
 
-<<<<<<< HEAD
 /* Route: Delete Blog Post
 Request:
 postID: uuid
@@ -67,39 +66,31 @@ Response:
 404: deleting failed
 */
 router.post('/deletePost', function(req, res) {
-  blog.deletePost(req.body.postID, function() {
-    res.render('home', {
-      title: "Blogeintrag gelöscht!"
+    blog.deletePost(req.body.postID, function() {
+        res.render('home', {
+            title: "Blogeintrag gelöscht!"
+        });
     });
-  });
-=======
+});
 
 // Events
 router.get('/newEvent', function(req, res) {
-  res.render('backend/newEvent', {
-    title: "möp!"
-  });
+    res.render('backend/newEvent', {
+        title: "möp!"
+    });
 });
 
 router.post('/newEvent', function(req, res) {
 
-  var timestamp = moment(req.body.hour+"-"+req.body.minute+"-"+req.body.day+"-"+req.body.month+"-"+req.body.year, "HH-mm-DD-MM-YYYY").unix();
+    var timestamp = moment(req.body.hour + "-" + req.body.minute + "-" + req.body.day + "-" + req.body.month + "-" + req.body.year, "HH-mm-DD-MM-YYYY").unix();
 
-  var postedEvent = {
-    author: "dev",
-    title: req.body.title,
-    content: req.body.content,
-    date: timestamp,
-    maxParticipants: req.body.maxParticipants
-  };
-
-  events.createEvent(postedEvent.title, postedEvent.author, postedEvent.content, postedEvent.date, postedEvent.maxParticipants, function() {
-    res.render('backend/newEvent', {
-      title: "Submitted!"
-    });
-  });
-
->>>>>>> c007d5527f1b0a87cacd8bc1afa2a9b809556e23
+    var postedEvent = {
+        author: "dev",
+        title: req.body.title,
+        content: req.body.content,
+        date: timestamp,
+        maxParticipants: req.body.maxParticipants
+    };
 });
 
 
