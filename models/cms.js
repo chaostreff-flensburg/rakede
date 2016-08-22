@@ -115,7 +115,6 @@ exports.createSubMenuPoint = function(title, callback) {
   });
 };
 
-
 //get all menu points
 exports.getMenu = function(callback) {
     r.table('cms_menu').run(connection, function(err, cursor) {

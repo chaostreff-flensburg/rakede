@@ -86,6 +86,22 @@ exports.getPost = function(slug, callback) {
   });
 };
 
+//get post by the following criteria: amount and age, order by age
+exports.getNewPosts = function(amount, callback) {
+  amount = amount || 1;
+  r.table('blog_posts').get(amount).orderBy('timestamp').run(connection, function(err, cursor) {
+    if (err) throw err;
+    cursor.toArray(function(err, result) {
+        if (err) throw err;
+        //convert time to unixEpoch
+        result.forEach((e, i, a) => {
+          e.timestamp = r.toEpochTime(e.timestamp) / 1000;
+        });
+        console.log(JSON.stringify(result, null, 2));
+        callback(result);
+    });
+  });
+};
 //update blog post
 exports.updatePost = function(uuid, content, title, category, callback) {
   r.table('blog_posts').get(uuid).update({content: content, title: title, category: category, slug: slug(title)}).run(connection, function(err, result) {

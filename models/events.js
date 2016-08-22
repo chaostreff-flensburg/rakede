@@ -80,6 +80,16 @@ exports.updateEvent = function(uuid, title, creator, description, time, maxParti
     });
 };
 
+exports.getEvent = function(uuid, callback) {
+  r.table('events_events').get(uuid).run(connection, function(err, result) {
+    if (err) throw err;
+    //convert time to unixEpoch
+    result.timestamp = result.toEpochTime(e.timestamp) / 1000;
+    console.log(JSON.stringify(result, null, 2));
+    callback(result);
+  });
+};
+
 exports.getAllEvents = function(callback) {
   r.table('events_events').run(connection, function(err, cursor) {
     if (err) throw err;
