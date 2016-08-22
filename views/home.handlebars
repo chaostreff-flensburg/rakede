@@ -22,7 +22,7 @@
   {{#if posts}}
     {{#each posts}}
       <h1>{{this.title}}</h1>
-      <p>{{this.content}}</p>
+      <p>{{{this.content}}}</p>
       <p>Post written by {{this.author}}</p>
       <hr>
     {{/each}}
@@ -34,7 +34,7 @@
   {{#if events}}
     {{#each events}}
       <h1>{{this.title}}</h1>
-      <p>{{this.content}}</p>
+      <p>{{{this.content}}}</p>
       <p>Offered by {{this.author}}</p>
       <hr>
     {{/each}}

@@ -65,7 +65,7 @@ exports.createEvent = function(name, creator, description, time, maxParticipants
 
 exports.updateEvent = function(uuid, title, creator, description, time, maxParticipants, callback) {
   //hange time to reql date
-  time = r.epochTime(time*1000);
+  time = r.epochTime(time);
 
   r.table('events_events').get(uuid).update({
         name: name,
