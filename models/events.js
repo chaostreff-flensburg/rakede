@@ -156,3 +156,7 @@ exports.addParticipantToEvent = function(uuid, name, email, email_sent) {
     callback(participant.id);
   });
 };
+
+exports.updateParticipant = function(uuid, email_sent, verified) {
+
+};

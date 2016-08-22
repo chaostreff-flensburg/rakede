@@ -59,8 +59,10 @@ router.post('/signup', function(req, res) {
         //if user has not signed up before, start signup process, else return 404
         if (!userFound) {
             //add user to event
+            var mailSent = false;
+
             events.addParticipantToEvent(req.body.event, req.body.name, req.body.email, false, function(uuid) {
-                //send verification mail
+                //try to send verification mail
                 var transporter = nodemailer.createTransport({
                     // if you do not provide the reverse resolved hostname
                     // then the recipients server might reject the connection
@@ -83,12 +85,12 @@ router.post('/signup', function(req, res) {
                 transporter.sendMail(mailOptions, function(error, info) {
                     if (error) {
                         console.log(error);
-                        var mail_sent = true;
                     }
                     else {
-                      mail_sent = true;
+                      mailSent = true;
+                      //update mailSent flag of participant
+                      
                     }
-
                 });
             });
             //save new participant
