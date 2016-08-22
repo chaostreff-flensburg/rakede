@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
+var chron = require('async');
 var cms = require('../models/cms');
-var blog = require('../models/blog');
+var blogs = require('../models/blog');
 var events = require('../models/events');
 
 router.use("/blog", require("./blog"));
@@ -12,7 +13,7 @@ router.get('/', function(req, res) {
 
   var data = {};
 
-  async.waterfall([
+  chron.waterfall([
     (callback) => {
       cms.getMenu((menu) => {
         data.menu = menu;
