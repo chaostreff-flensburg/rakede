@@ -72,10 +72,13 @@ exports.getAllPosts = function(callback) {
 
 //get specific blog post via slug
 exports.getPost = function(slug, callback) {
-    r.table('blog_posts').filter(r.row('slug').eq(slug)).merge({time: r.row('time').toEpochTime()}).run(connection, function(err, result) {
+    r.table('blog_posts').filter(r.row('slug').eq(slug)).merge({time:r.row('time').toEpochTime()}).run(connection, function(err, cursor) {
       if (err) throw err;
-      console.log(JSON.stringify(result, null, 2));
-      callback(result);
+      cursor.toArray(function(err, result) {
+          if (err) throw err;
+          console.log(JSON.stringify(result, null, 2));
+          callback(result);
+      });
   });
 };
 
@@ -87,10 +90,6 @@ exports.getNewPosts = function(amount, callback) {
     cursor.toArray(function(err, result) {
         if (err) throw err;
         console.log(JSON.stringify(result, null, 2));
-        //convert time to unixEpoch
-        /*result.forEach((e, i, a) => {
-          e.time = getTime(e.time) / 1000;
-        });*/
         callback(result);
     });
   });
