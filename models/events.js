@@ -84,7 +84,7 @@ exports.getEvent = function(uuid, callback) {
   r.table('events_events').get(uuid).run(connection, function(err, result) {
     if (err) throw err;
     //convert time to unixEpoch
-    result.timestamp = result.toEpochTime(e.timestamp) / 1000;
+    result.time = result.toEpochTime(e.time) / 1000;
     console.log(JSON.stringify(result, null, 2));
     callback(result);
   });
@@ -97,7 +97,7 @@ exports.getAllEvents = function(callback) {
         if (err) throw err;
         //convert time to unixEpoch
         result.forEach((e, i, a) => {
-          e.timestamp = r.toEpochTime(e.timestamp) / 1000;
+          e.time = r.toEpochTime(e.time) / 1000;
         });
         console.log(JSON.stringify(result, null, 2));
         callback(result);
@@ -112,7 +112,7 @@ exports.getNewEvents = function(amount, callback) {
         if (err) throw err;
         //convert time to unixEpoch
         result.forEach((e, i, a) => {
-          e.timestamp = r.toEpochTime(e.timestamp) / 1000;
+          e.time = r.toEpochTime(e.time) / 1000;
         });
         console.log(JSON.stringify(result, null, 2));
         callback(result);
@@ -157,6 +157,11 @@ exports.addParticipantToEvent = function(uuid, name, email, email_sent) {
   });
 };
 
-exports.updateParticipant = function(uuid, email_sent, verified) {
-
+exports.updateParticipant = function(event, uuid, email_sent, verified) {
+  r.table('events_events').get(event)('participants').filter({id: uuid}).run(connection, function(err, result) {
+    if (err) throw err;
+    console.log(JSON.stringify(result, null, 2));
+    //result.emailS
+    callback(participant.id);
+  });
 };
