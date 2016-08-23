@@ -129,7 +129,7 @@ exports.getParticipantsOfEvent = function(uuid, callback) {
 };
 
 //add a new participant with name and email, also flag if email for verification has been sent
-exports.addParticipantToEvent = function(uuid, name, email) {
+exports.addParticipantToEvent = function(uuid, name, email, callback) {
   //create participant object
   var participant = {
       id: r.uuid(),
@@ -150,10 +150,23 @@ exports.addParticipantToEvent = function(uuid, name, email) {
   });
 };
 
-exports.updateParticipant = function(event, uuid, email_sent, verified) {
-  r.table('events_events').get(event)('participants').filter({id: uuid}).update({email_sent: email_sent, verified: verified}).run(connection, function(err, result) {
+exports.updateParticipant = function(event, user, email_sent, verified, callback) {
+  r.table('events_events').get(event)('participants').filter({id: user}).update({email_sent: email_sent, verified: verified}).run(connection, function(err, result) {
     if (err) throw err;
     console.log(JSON.stringify(result, null, 2));
-    callback();
+    callback(err, result);
+  });
+};
+
+//delete participant from event
+exports.deleteParticipant = function(event, user, callback) {
+
+  r.table('events_events').get(uuid)('participants').update( function(row) {
+  return {participants: row('participants').without(row('participants').filter({id: user}))};}, {
+    nonAtomic: true
+  }).run(connection, function(err, result) {
+    if (err) throw err;
+    console.log(JSON.stringify(result, null, 2));
+    callback(err, result);
   });
 };

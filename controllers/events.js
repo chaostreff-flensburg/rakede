@@ -105,4 +105,75 @@ router.post('/signup', function(req, res) {
     });
 });
 
+/* Route: /verifySignup
+Request:
+userid: string,
+eventid: string
+
+Response:
+200: verified,
+404: verification failed
+*/
+router.get('/verifySignup', function(req, res) {
+  //get user and event id from params
+  var userid = req.params.userid;
+  var eventid = req.params.eventid;
+  //update participant
+  events.updateParticipant(eventid, userid, true, true, function(err, res) {
+    if(err) {
+      res.end(404);
+    } else {
+      //try to send verification success mail
+      var transporter = nodemailer.createTransport({
+          // if you do not provide the reverse resolved hostname
+          // then the recipients server might reject the connection
+          name: 'google.de',
+          // use direct sending
+          direct: true
+      });
+      //signout link
+      var signoutLink = "192.168.0.52:3002/signout?userid=" + userid + "&eventid=" + eventid;
+      //bestätigung eventteilnahme
+      var mailOptions = {
+          from: '"Chaostreff Flensburg" <events@chaostreff-flensburg.de>', // sender address
+          to: participant.email, // list of receivers
+          subject: 'Teilnahme an ' + event.name + ' bestätigt!', // Subject line
+          text: 'Hallo ' + participant.name + '!', // plaintext body
+          html: '<b>Hallo ' + participant.name + '! Du hast soeben deine Teilnahme am Event ' + event.name + ' bestätigt! Um dich wieder auszutragen, klicke auf diesen Link: <a href=' + signoutLink + '>Link:</a>.</b>' // html body
+      };
+
+      // send mail with defined transport object
+      transporter.sendMail(mailOptions, function(error, info) {
+          if (error) {
+              console.log(error);
+          }
+      });
+      res.end(200);
+    }
+  });
+});
+
+/* Route: /signout
+Request:
+userid: string,
+eventid: string
+
+Response:
+200: signed out,
+404: signout failed/ signed out before
+*/
+router.get('/signout', function(req, res) {
+  //get user and event id from params
+  var userid = req.params.userid;
+  var eventid = req.params.eventid;
+  //update participant
+  events.deleteParticipant(eventid, userid, function(err, res) {
+    if(err) {
+      res.end(404);
+    } else {
+      res.end(200);
+    }
+  });
+});
+
 module.exports = router;
