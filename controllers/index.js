@@ -9,6 +9,7 @@ router.use("/blog", require("./blog"));
 router.use("/events", require("./events"));
 router.use("/auth", require("./authentication"));
 router.use("/rakede", require("./backend"));
+router.use("/site", require("./cms"));
 
 router.get('/', function(req, res) {
   var data = {layout:false};

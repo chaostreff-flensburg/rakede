@@ -55,10 +55,13 @@ exports.createSite = function(title, content, callback) {
 
 //get specific site via slug
 exports.getSite = function(slug, callback) {
-    r.table('cms_sites').get(slug).run(connection, function(err, result) {
+    r.table('cms_sites').filter({slug: slug}).run(connection, function(err, cursor) {
       if (err) throw err;
-      console.log(JSON.stringify(result, null, 2));
-      callback(result);
+      cursor.toArray(function(err, result) {
+          if (err) throw err;
+          console.log(JSON.stringify(result, null, 2));
+          callback(err, result);
+      });
   });
 };
 
