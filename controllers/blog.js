@@ -26,7 +26,7 @@ Response:
 */
 router.get('/:slug', function(req, res) {
   blog.getPost(req.params.slug, function(result) {
-    res.render('singleblog', {
+    res.render('blogpost', {
       post: result[0]
     });
   });
