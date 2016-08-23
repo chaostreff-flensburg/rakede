@@ -1,6 +1,4 @@
-# rakede
-
-> intergalactic organization communication
+![rakede](./docs/rakede-logo.png)
 
 ## Getting Started
 
