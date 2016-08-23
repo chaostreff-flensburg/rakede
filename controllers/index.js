@@ -12,7 +12,7 @@ router.use("/rakede", require("./backend"));
 
 router.get('/', function(req, res) {
 
-  var data = {};
+  var data = {layout:false};
 
   chron.waterfall([
     (callback) => {
