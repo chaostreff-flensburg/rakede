@@ -7,6 +7,7 @@ var events = require('../models/events');
 
 router.use("/blog", require("./blog"));
 router.use("/events", require("./events"));
+router.use("/auth", require("./authentication"));
 router.use("/rakede", require("./backend"));
 
 router.get('/', function(req, res) {

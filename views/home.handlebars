@@ -22,7 +22,7 @@
   {{#if posts}}
     {{#each posts}}
       <h1>{{this.title}}</h1>
-      <p>{{{this.content}}}</p>
+      {{{this.content}}}
       <p>Post written by {{this.author}}</p>
       <hr>
     {{/each}}
@@ -34,8 +34,9 @@
   {{#if events}}
     {{#each events}}
       <h1>{{this.name}}</h1>
-      <p>{{{this.description}}}</p>
-      <p>Offered by {{this.creator}}</p>
+      {{{this.description}}}
+      <p>max {{this.maxParticipants}} participants</p>
+      <p>Offered by {{this.creator}} @ {{this.time}}</p>
       <hr>
     {{/each}}
   {{else}}

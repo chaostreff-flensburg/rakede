@@ -3,7 +3,8 @@
   "tables": {
     "blog": ["posts", "categories"],
     "cms": ["sites", "menu"],
-    "events": ["events"]
+    "events": ["events"],
+    "rakede": ["users"]
   },
   "delimiter": "_"
 }
