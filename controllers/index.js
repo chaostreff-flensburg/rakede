@@ -39,6 +39,7 @@ router.get('/', function(req, res) {
   });
 });
 
+// To-Do: remove test-route when data is implemented on home site
 router.get('/test', function(req, res) {
   var data = {};
 
