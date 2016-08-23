@@ -21,13 +21,9 @@ r.connect( {host: 'localhost', port: 28015, db: 'rakede'}, function(err, conn) {
 
 {
   title: string,
-  site: slug-string.
-  submenu: [
-    {
-      title: string,
-      slug: slug string
-    }
-  ]
+  url: string.
+  x:  int,
+  y:  int
 }
 
 */
@@ -86,12 +82,13 @@ exports.deleteSite = function(slug, callback) {
 
 /*----------------crud controller for dropdown-menu----------*/
 
-exports.createMenuPoint = function(title, callback) {
+exports.createMenuPoint = function(title, url, x, y, callback) {
   //create menupoint object
   var menu = {
     title:  title,
-    slug: slug(title),
-    submenu: [],
+    url:  url,
+    x:  x,
+    y:  y
   };
 
   //insert menu object
@@ -102,21 +99,32 @@ exports.createMenuPoint = function(title, callback) {
   });
 };
 
-exports.createSubMenuPoint = function(title, callback) {
-  //create submenupoint object
-  var submenu = {
+exports.updateMenuPoint = function(uuid, title, url, x, y, callback) {
+  //create menupoint object
+  var menu = {
     title:  title,
-    slug: slug(title)
+    url:  url,
+    x:  x,
+    y:  y
   };
 
-  //insert submenu object
-  r.table('cms_menu').get(slug)('submenu').append(submenu).run(connection, function(err, result) {
+  //update menu object
+  r.table('cms_menu').get(uuid).update(menu).run(connection, function(err, result) {
     if (err) throw err;
     console.log(JSON.stringify(result, null, 2));
     callback();
   });
 };
 
+//delete single menu point
+exports.deleteMenuPoint = function(uuid, callback) {
+  //delete menu object
+  r.table('cms_menu').get(uuid).delete().run(connection, function(err, result) {
+    if (err) throw err;
+    console.log(JSON.stringify(result, null, 2));
+    callback();
+  });
+};
 
 //get all menu points
 exports.getMenu = function(callback) {
