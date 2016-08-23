@@ -1,6 +1,6 @@
 /* main.css */
 
-/* === CSS RESET ===*/
+/* === CSS RESET === */
 
 html, body, div, span, applet, object, iframe, abbr, acronym, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
   margin: 0;
@@ -32,4 +32,11 @@ a:focus, button:focus {
 }
 button::-moz-focus-inner {
   border: 0;
+}
+
+/* === MAIN TAGS ===*/
+
+body {
+  background-image: url("/img/bg.png");
+  background-repeat: repeat;
 }
