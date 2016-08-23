@@ -52,3 +52,9 @@ p, span, a, b, i {
 }
 
 /* === ELEMENTS ===*/
+
+/* === HEADER ===*/
+
+.logo {
+  max-width: 480px;
+}
