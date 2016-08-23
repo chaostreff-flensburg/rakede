@@ -129,18 +129,21 @@ exports.getParticipantsOfEvent = function(uuid, callback) {
 };
 
 //add a new participant with name and email, also flag if email for verification has been sent
-exports.addParticipantToEvent = function(uuid, name, email, email_sent) {
+exports.addParticipantToEvent = function(uuid, name, email) {
   //create participant object
   var participant = {
       id: r.uuid(),
       name: name,
       email:  email,
       signup: r.now(),
-      email_sent: email_sent,
+      email_sent: false,
       verified: false
   };
 
-  r.table('events_events').get(uuid)('participants').append(participant).run(connection, function(err, result) {
+  r.table('events_events').get(uuid)('participants').update( function(row) {
+  return {participants: row('participants').append(participant)};}, {
+    nonAtomic: true
+  }).run(connection, function(err, result) {
     if (err) throw err;
     console.log(JSON.stringify(result, null, 2));
     callback(participant.id);

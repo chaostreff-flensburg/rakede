@@ -61,7 +61,7 @@ router.post('/signup', function(req, res) {
             //add user to event
             var mailSent = false;
 
-            events.addParticipantToEvent(req.body.event, req.body.name, req.body.email, false, function(uuid) {
+            events.addParticipantToEvent(req.body.event, req.body.name, req.body.email,function(uuid) {
                 //try to send verification mail
                 var transporter = nodemailer.createTransport({
                     // if you do not provide the reverse resolved hostname

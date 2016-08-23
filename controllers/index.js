@@ -38,7 +38,7 @@ router.get('/', function(req, res) {
     res.render('home', data);
 
   });
-  
+
 });
 
 module.exports = router;
