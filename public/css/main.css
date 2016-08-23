@@ -39,4 +39,16 @@ button::-moz-focus-inner {
 body {
   background-image: url("/img/bg.png");
   background-repeat: repeat;
+  background-color: #f9f9f9;
+  overflow-x: hidden;
 }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Amatic SC', cursive !important;
+}
+
+p, span, a, b, i {
+  font-family: 'Merriweather', serif;
+}
+
+/* === ELEMENTS ===*/
