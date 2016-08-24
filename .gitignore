@@ -2,3 +2,4 @@ rethinkdb_data
 node_modules
 config/tokens.json
 .jshintrc
+public/upload/
