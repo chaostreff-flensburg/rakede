@@ -63,6 +63,11 @@ h3 {
 
 p, span, a, b, i {
   font-family: 'Merriweather', serif;
+  color: #272726;
+}
+
+p, span, a, i {
+  font-weight: 300;
 }
 
 /* === ELEMENTS ===*/
