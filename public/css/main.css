@@ -45,6 +45,20 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Amatic SC', cursive !important;
+  color: #272726;
+}
+
+h1 {
+  font-size: 4em;
+}
+
+h2 {
+  margin-top: 0.25em;
+  font-size: 2.5em;
+}
+
+h3 {
+  font-size: 2em;
 }
 
 p, span, a, b, i {
