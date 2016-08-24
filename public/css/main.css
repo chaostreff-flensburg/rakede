@@ -79,6 +79,11 @@ p, span, a, i {
   border-radius: 3px;
   box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
 }
+
+.amatic {
+  font-family: 'Amatic SC', cursive;
+  font-size: 1.75em;
+}
 /* === HEADER ===*/
 
 .logo {
