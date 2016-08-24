@@ -84,6 +84,30 @@ p, span, a, i {
   font-family: 'Amatic SC', cursive;
   font-size: 1.75em;
 }
+
+.button {
+  font-family: 'Amatic SC', cursive;
+  font-size: 1.5em;
+  font-weight: bold;
+  text-decoration: none;
+  color: #ffffff;
+  background-color: #272726;
+  padding: 8px;
+  padding-left: 12px;
+  padding-right: 12px;
+  border-radius: 5px;
+}
+
+.c {
+  background-color: #009fe3 !important;
+}
+.m {
+  background-color: #e6007e !important;
+}
+.y {
+  background-color: #ffed00 !important;
+}
+
 /* === HEADER ===*/
 
 .logo {
