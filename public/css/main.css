@@ -110,6 +110,18 @@ p, span, a, i {
 
 /* === HEADER ===*/
 
+header {
+  margin-top: 2em;
+  margin-bottom: 2em;
+  max-height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .logo {
-  max-width: 480px;
+  width: 440px;
+  height: auto;
+  margin-left: 1em;
+  margin-right: 1em;
 }
