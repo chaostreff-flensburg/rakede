@@ -4,15 +4,18 @@ var chron = require('async');
 var cms = require('../models/cms');
 var blogs = require('../models/blog');
 var events = require('../models/events');
+var tokens = require('../config/tokens.json');
 
 router.use("/blog", require("./blog"));
 router.use("/events", require("./events"));
-router.use("/auth", require("./authentication"));
+router.use("/login", require("./authentication"));
 router.use("/rakede", require("./backend"));
 router.use("/site", require("./cms"));
 
 router.get('/', function(req, res) {
-  var data = {layout:false};
+  var data = {layout:false,
+    slackButton: "<a href='https://slack.com/oauth/authorize?scope=identity.basic,identity.team&client_id="+tokens.clientID+"&redirect_uri="+tokens.callbackURL+"'><img alt='Sign in with Slack' height='40' width='172' src='https://platform.slack-edge.com/img/sign_in_with_slack.png' srcset='https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x' /></a>"
+  };
 
   chron.waterfall([
     (callback) => {
@@ -35,6 +38,8 @@ router.get('/', function(req, res) {
     }
   ], (err, result) => {
     if (err) res.end(500);
+    //slack button
+
     res.render('home', data);
   });
 });

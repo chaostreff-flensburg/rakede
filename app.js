@@ -11,6 +11,7 @@ var express         = require("express"),
     errorHandler    = require('errorhandler'),
     passport        = require('passport'),
     slackStrategy   = require('passport-slack').Strategy,
+    tokens          = require('./config/tokens.json'),
     methodOverride  = require('method-override'),
     hostname        = process.env.HOSTNAME || 'localhost',
     PORT            = process.env.PORT || 8081,
@@ -20,6 +21,7 @@ var express         = require("express"),
     exphbs          = require('express-handlebars'),
     session         = require('express-session'),
     dbstart         = require('./helpers/dbstart.js');
+
 
 
 // ====================
@@ -39,6 +41,13 @@ app.use(errorHandler({
     dumpExceptions: true,
     showStack: true
 }));
+//passport configuration
+passport.use(new slackStrategy({
+        clientID: tokens.clientID,
+        clientSecret: tokens.clientSecret,
+        //callbackURL:  tokens.callbackURL,
+        scope: 'incoming-webhook users:read'
+    }, function() {}));
 // require Routes in ./controllers
 app.use(require('./controllers'));
 
