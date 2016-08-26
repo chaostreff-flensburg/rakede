@@ -45,16 +45,83 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Amatic SC', cursive !important;
+  color: #272726;
+}
+
+h1 {
+  font-size: 4em;
+}
+
+h2 {
+  margin-top: 0.25em;
+  font-size: 2.5em;
+}
+
+h3 {
+  font-size: 2em;
 }
 
 p, span, a, b, i {
   font-family: 'Merriweather', serif;
+  color: #272726;
+}
+
+p, span, a, i {
+  font-weight: 300;
 }
 
 /* === ELEMENTS ===*/
 
+.card {
+  background-color: #fefefe;
+  padding: 1em;
+  margin: 1em;
+  border-radius: 3px;
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
+}
+
+.amatic {
+  font-family: 'Amatic SC', cursive;
+  font-size: 1.75em;
+}
+
+.button {
+  font-family: 'Amatic SC', cursive;
+  font-size: 1.5em;
+  font-weight: bold;
+  text-decoration: none;
+  color: #ffffff;
+  background-color: #272726;
+  padding: 8px;
+  padding-left: 12px;
+  padding-right: 12px;
+  border-radius: 5px;
+}
+
+.c {
+  background-color: #009fe3 !important;
+}
+.m {
+  background-color: #e6007e !important;
+}
+.y {
+  background-color: #ffed00 !important;
+}
+
 /* === HEADER ===*/
 
+header {
+  margin-top: 2em;
+  margin-bottom: 2em;
+  max-height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .logo {
-  max-width: 480px;
+  width: 440px;
+  height: auto;
+  margin-left: 1em;
+  margin-right: 1em;
 }

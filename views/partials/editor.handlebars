@@ -1,0 +1,13 @@
+<textarea name="content" id="content">This is a TinyMCE-Editor. Nice.</textarea>
+
+<script src="/js/tinymce/tinymce.min.js"></script>
+<script>
+tinymce.init({
+  selector: '#content',
+  automatic_uploads: true,
+  images_upload_url: '/rakede/upload',
+  plugins: "anchor autosave autoresize code image link media paste wordcount",
+  menubar: "insert tools image imagetools",
+  paste_data_images: true
+});
+</script>
