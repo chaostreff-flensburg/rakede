@@ -15,6 +15,7 @@ var express         = require("express"),
     PORT            = process.env.PORT || 8081,
     publicDir       = process.argv[2] || __dirname + '/public',
     path            = require('path'),
+    passport        = require('passport'),
     sockio          = require("socket.io"),
     exphbs          = require('express-handlebars'),
     session         = require('express-session'),
@@ -39,7 +40,30 @@ app.use(errorHandler({
     dumpExceptions: true,
     showStack: true
 }));
-app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
+app.use(session({ secret: tokens.clientSecret, resave: false, saveUninitialized: true }));
+//passport configuration
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+var SlackStrategy = require('passport-slack-ponycode').SlackStrategy;
+passport.use( 'slack', new SlackStrategy({
+    clientID: tokens.clientID,
+    clientSecret: tokens.clientSecret,
+    callbackURL: tokens.callbackURL,
+    slackTeam: "T03JL4VF6"
+}, function( token, tokenSecret, profile, cb ){
+return cb(null, profile);
+}));
+
+
+passport.serializeUser(function(user, cb) {
+  cb(null, user);
+});
+
+passport.deserializeUser(function(obj, cb) {
+  cb(null, obj);
+});
 // require Routes in ./controllers
 app.use(require('./controllers'));
 

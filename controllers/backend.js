@@ -8,8 +8,9 @@ var crypto = require("crypto");
 var blog = require('../models/blog');
 var events = require('../models/events');
 var cms = require('../models/cms');
+var checkSession = require("../middlewares/checkSession.js");
 
-router.get('/', function(req, res) {
+router.get('/', checkSession, function(req, res) {
     res.render('backend/dashboard', {
         title: "möp!"
     });
@@ -17,7 +18,7 @@ router.get('/', function(req, res) {
 
 
 // Blogpost
-router.get('/newPost', function(req, res) {
+router.get('/newPost', checkSession, function(req, res, next) {
     res.render('backend/newBlogPost', {
         title: "möp!"
     });
@@ -34,7 +35,7 @@ Response:
 200: blogpost created,
 404: creating failed
 */
-router.post('/newPost', function(req, res) {
+router.post('/newPost', checkSession, function(req, res, next) {
     blog.createPost(req.body.author, req.body.content, req.body.title, req.body.category, function() {
         res.render('backend/newBlogPost', {
             title: "Submitted!"
@@ -53,7 +54,7 @@ Response:
 200: blogpost updated,
 404: updating failed
 */
-router.post('/updatePost', function(req, res) {
+router.post('/updatePost', checkSession, function(req, res, next) {
     blog.updatePost(req.body.postID, req.body.content, req.body.title, req.body.category, function() {
         res.render('home', {
             title: "Blogeintrag aktualisiert!"
@@ -69,7 +70,7 @@ Response:
 200: blogpost deleted,
 404: deleting failed
 */
-router.post('/deletePost', function(req, res) {
+router.post('/deletePost', checkSession, function(req, res, next) {
     blog.deletePost(req.body.postID, function() {
         res.render('home', {
             title: "Blogeintrag gelöscht!"
@@ -78,13 +79,13 @@ router.post('/deletePost', function(req, res) {
 });
 
 // Events
-router.get('/newEvent', function(req, res) {
+router.get('/newEvent', checkSession, function(req, res) {
     res.render('backend/newEvent', {
         title: "möp!"
     });
 });
 
-router.post('/newEvent', function(req, res) {
+router.post('/newEvent', checkSession, function(req, res, next) {
 
     var timestamp = moment(req.body.hour + "-" + req.body.minute + "-" + req.body.day + "-" + req.body.month + "-" + req.body.year, "HH-mm-DD-MM-YYYY").unix();
 
@@ -105,13 +106,13 @@ router.post('/newEvent', function(req, res) {
 
 
 // CMS
-router.get('/newSite', function(req, res) {
+router.get('/newSite', checkSession, function(req, res, next) {
   res.render('backend/newSite', {
     title: "möp!"
   });
 });
 
-router.post('/newSite', function(req, res) {
+router.post('/newSite', checkSession, function(req, res, next) {
   cms.createSite(req.body.title, req.body.content, function() {
     res.render('backend/newSite', {
         title: "Submitted!"

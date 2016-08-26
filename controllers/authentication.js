@@ -1,37 +1,30 @@
 var express = require('express');
 var router = express.Router();
-var passport        = require('passport'),
-tokens = require('../config/tokens.json');
-//passport configuration
+var passport = require('passport');
+var users = require('../models/user.js');
 
-router.use(passport.initialize());
-router.use(passport.session());
-
-var SlackStrategy = require('passport-slack-ponycode').SlackStrategy;
-passport.use( 'slack', new SlackStrategy({
-    clientID: tokens.clientID,
-    clientSecret: tokens.clientSecret,
-    callbackURL: tokens.callbackURL
-}, function( token, tokenSecret, profile, cb ){
-return cb(null, profile);
-}));
-
-
-passport.serializeUser(function(user, cb) {
-  cb(null, user);
-});
-
-passport.deserializeUser(function(obj, cb) {
-  cb(null, obj);
-});
 
 router.get('/',
-  passport.authenticate('slack'));
+  passport.authenticate('slack', {team: "T03JL4VF6", failureRedirect: '/' }));
 
+  router.get('/logout', function(req, res) {
+    //destroy session
+    req.session.destroy();
+    //send user to main page
+    res.redirect('/');
+  });
+
+//callback route for token negotiation (has to be defined in passport config and slack app!)
 router.get('/callback',
-  passport.authenticate('slack', {failureRedirect: '/login' }),
+  passport.authenticate('slack', {team: "T03JL4VF6", failureRedirect: '/' }),
   function(req, res) {
-    // Successful authentication, redirect home.
+    // Successful authentication
+    //set session cookie
+    req.session.name = req.user.id;
+    //create user if he does not exist yet
+    users.createUser(req.user.id, req.user.username, function(err, res) {
+    });
+    //redirect to backend.
     res.redirect('/rakede');
   });
 
