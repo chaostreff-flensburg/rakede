@@ -9,8 +9,6 @@ var express         = require("express"),
     bodyParser      = require('body-parser'),
     cookieParser    = require('cookie-parser'),
     errorHandler    = require('errorhandler'),
-    passport        = require('passport'),
-    slackStrategy   = require('passport-slack').Strategy,
     tokens          = require('./config/tokens.json'),
     methodOverride  = require('method-override'),
     hostname        = process.env.HOSTNAME || 'localhost',
@@ -41,13 +39,7 @@ app.use(errorHandler({
     dumpExceptions: true,
     showStack: true
 }));
-//passport configuration
-passport.use(new slackStrategy({
-        clientID: tokens.clientID,
-        clientSecret: tokens.clientSecret,
-        //callbackURL:  tokens.callbackURL,
-        scope: 'incoming-webhook users:read'
-    }, function() {}));
+app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 // require Routes in ./controllers
 app.use(require('./controllers'));
 
