@@ -49,7 +49,7 @@ router.post('/signup', function(req, res) {
     //get event
     events.getEvents(req.body.event, function(event) {
         //if event has not been found, send 404
-        if (!event) res.end(404);
+        if (!event) res.sendStatus(404);
         //check if user has already signed up before
         event.participants.forEach(function(participant) {
             if (participant.email == req.body.email) {
@@ -95,12 +95,12 @@ router.post('/signup', function(req, res) {
                     }
                 });
                 //success
-                res.end(200);
+                res.sendStatus(200);
             });
             //save new participant
         } else {
             //user signed up beforehand
-            res.end(404);
+            res.sendStatus(404);
         }
     });
 });
@@ -121,7 +121,7 @@ router.get('/verifySignup', function(req, res) {
   //update participant
   events.updateParticipant(eventid, userid, true, true, function(err, res) {
     if(err) {
-      res.end(404);
+      res.sendStatus(404);
     } else {
       //try to send verification success mail
       var transporter = nodemailer.createTransport({
@@ -148,7 +148,7 @@ router.get('/verifySignup', function(req, res) {
               console.log(error);
           }
       });
-      res.end(200);
+      res.sendStatus(200);
     }
   });
 });
@@ -169,9 +169,9 @@ router.get('/signout', function(req, res) {
   //update participant
   events.deleteParticipant(eventid, userid, function(err, res) {
     if(err) {
-      res.end(404);
+      res.sendStatus(404);
     } else {
-      res.end(200);
+      res.sendStatus(200);
     }
   });
 });
