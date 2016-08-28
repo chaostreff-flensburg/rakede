@@ -1,5 +1,5 @@
-
-{{#if site}}
-<h1>{{site.title}}</h1>
-{{{site.content}}}
+{{> menu}}
+{{#if data.site}}
+<h1>{{data.site.title}}</h1>
+{{{data.site.content}}}
 {{/if}}

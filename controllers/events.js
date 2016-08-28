@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var events = require('../models/events');
 var nodemailer = require('nodemailer');
+var cms = require('../models/cms');
+var chron = require('async');
 
 /* Route: / (fetch all events)
 Request:
@@ -11,26 +13,28 @@ Response:
 404: no posts/ fetching events failed
 */
 router.get('/', function(req, res) {
-    events.getAllEvents(function(result) {
-        res.render('home', {
-            posts: result
-        });
-    });
-});
+  var data = {};
 
-/* Route: / (fetch all events)
-Request:
-
-Response:
-200: {events},
-404: no posts/ fetching events failed
-*/
-router.get('/createEvent', function(req, res) {
-    events.getAllEvents(function(result) {
-        res.render('home', {
-            posts: result
-        });
+chron.waterfall([
+  (callback) => {
+    cms.getMenu((menu) => {
+      data.menu = menu;
+      callback(null, data);
     });
+  },
+  (data, callback) => {
+    events.getAllEvents((events) => {
+      data.events = events;
+      callback(null, data);
+    });
+  }
+], (err, result) => {
+  if (err) res.sendStatus(500);
+  //slack button
+    res.render('home', {
+      data: data
+    });
+  });
 });
 
 /* Route: /signup

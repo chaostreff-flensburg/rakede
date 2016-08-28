@@ -1,8 +1,8 @@
-
-{{#if post}}
+{{> menu}}
+{{#if data.post}}
 <h1>Blogeintrag</h1>
-    <h1>{{post.title}}</h1>
-    <p>{{{post.content}}}</p>
-    <p>Post written by {{post.author}} @ {{post.time}}</p>
+    <h1>{{data.post.title}}</h1>
+    <p>{{{data.post.content}}}</p>
+    <p>Post written by {{data.post.author}} @ {{data.post.time}}</p>
     <hr>
 {{/if}}

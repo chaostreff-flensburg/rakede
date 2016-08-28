@@ -20,10 +20,18 @@ r.connect( {host: 'localhost', port: 28015, db: 'rakede'}, function(err, conn) {
 /*      DEFINITION menu
 
 {
-  title: string,
-  url: string.
-  x:  int,
-  y:  int
+  x: [
+    {
+    title: string,
+    url: string,
+    y: [
+    {
+    title: string,
+    url: string
+  }
+  ]
+    }
+  ]
 }
 
 */
@@ -84,7 +92,7 @@ exports.deleteSite = function(slug, callback) {
 };
 
 /*----------------crud controller for dropdown-menu----------*/
-
+/*  DEPRECATED
 exports.createMenuPoint = function(title, url, x, y, callback) {
   //create menupoint object
   var menu = {
@@ -101,24 +109,18 @@ exports.createMenuPoint = function(title, url, x, y, callback) {
     callback();
   });
 };
-
-exports.updateMenuPoint = function(uuid, title, url, x, y, callback) {
-  //create menupoint object
-  var menu = {
-    title:  title,
-    url:  url,
-    x:  x,
-    y:  y
-  };
+*/
+exports.updateMenu = function(menu, callback) {
 
   //update menu object
-  r.table('cms_menu').get(uuid).update(menu).run(connection, function(err, result) {
+  r.table('cms_menu').get(1).update(menu).run(connection, function(err, result) {
     if (err) throw err;
     console.log(JSON.stringify(result, null, 2));
     callback();
   });
 };
 
+/*  DEPRECATED
 //delete single menu point
 exports.deleteMenuPoint = function(uuid, callback) {
   //delete menu object
@@ -128,15 +130,12 @@ exports.deleteMenuPoint = function(uuid, callback) {
     callback();
   });
 };
+*/
 
 //get all menu points
 exports.getMenu = function(callback) {
-    r.table('cms_menu').run(connection, function(err, cursor) {
+    r.table('cms_menu').get(1).run(connection, function(err, result) {
       if (err) throw err;
-      cursor.toArray(function(err, result) {
-          if (err) throw err;
-          console.log(JSON.stringify(result, null, 2));
-          callback(result);
-      });
+      callback(result);
   });
 };

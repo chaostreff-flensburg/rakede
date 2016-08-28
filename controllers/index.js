@@ -37,7 +37,7 @@ router.get('/', function(req, res) {
       });
     }
   ], (err, result) => {
-    if (err) res.end(500);
+    if (err) res.sendStatus(500);
     //slack button
 
     res.render('home', data);
@@ -68,7 +68,7 @@ router.get('/test', function(req, res) {
       });
     }
   ], (err, result) => {
-    if (err) res.end(500);
+    if (err) res.sendStatus(500);
     res.render('test_home', data);
   });
 });
