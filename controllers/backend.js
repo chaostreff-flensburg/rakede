@@ -11,7 +11,7 @@ var cms = require('../models/cms');
 
 router.get('/', function(req, res) {
     res.render('backend/dashboard', {
-        title: "möp!"
+        layout: "../backend/backend"
     });
 });
 
