@@ -138,3 +138,40 @@ header {
   margin: 1em;
 }
 
+/* === NAV ===*/
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+}
+
+.navlink {
+  font-family: "Amatic SC", cursive;
+  font-size: 34px;
+  font-weight: bold;
+  text-decoration: none;
+  margin-left: 2em;
+  margin-right: 2em;
+  margin-top: -8px;
+  margin-bottom: -8px;
+}
+
+/* === ABOUT ===*/
+
+.about {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.aboutImage {
+  display: flex;
+  justify-content: center;
+}
+
+.chaosknoten {
+  width: auto;
+  height: 200px;
+  margin-top: 2em;
+}
