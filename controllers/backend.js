@@ -11,9 +11,9 @@ var cms = require('../models/cms');
 var checkSession = require("../middlewares/checkSession.js");
 
 router.get('/', checkSession, function(req, res) {
-    res.render('backend/dashboard', {
-        layout: "../backend/backend"
-    });
+  res.render('backend/dashboard', {
+    layout: "../backend/backend"
+  });
 });
 
 
