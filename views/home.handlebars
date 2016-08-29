@@ -75,7 +75,25 @@
                 <a href="/blog/{{this.slug}}" class="button c">Den ganzen Beitrag lesen..</a>
               {{/each}}
             {{else}}
-              <h1>No posts</h1>
+              <p>Es sind keine Blogposts vorhanden.</p>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+
+      <div class="events row">
+        <div class="upcomming col s12 m10 l8 offset-m1">
+          <div class="card">
+            <h2>Die nächsten Events</h2>
+            {{#if events}}
+              {{#each events}}
+                <h3>{{this.name}}</h3>
+                {{{this.description}}}
+                <p><i>max. {{this.maxParticipants}} Teilnehmer</i></p>
+                <p>Angeboten von {{this.creator}} am {{this.time}}</p>
+              {{/each}}
+            {{else}}
+              <p>Aktuell sind keine Events geplannt.</p>
             {{/if}}
           </div>
         </div>

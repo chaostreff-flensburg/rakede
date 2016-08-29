@@ -78,6 +78,10 @@ p, span, a, i {
   font-weight: 300;
 }
 
+i {
+  font-style: italic;
+}
+
 /* === ELEMENTS ===*/
 
 .card {
