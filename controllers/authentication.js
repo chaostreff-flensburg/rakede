@@ -18,7 +18,7 @@ router.get('/',
 router.get('/callback',
   passport.authenticate('slack', {team: "T03JL4VF6", failureRedirect: '/' }),
   function(req, res) {
-
+    // only allow users from specified slack-team
     if (req.user.teamId != 'T03JL4VF6') {
       req.session.destroy();
       res.redirect('/');
