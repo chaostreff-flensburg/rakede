@@ -62,6 +62,25 @@
         </div>
       </div>
 
+      <div class="news row">
+        <div class="blog col s12 m10 l8 offset-m1 offset-l3">
+          <div class="card">
+            <h2>Neues im Blog</h2>
+            {{#if posts}}
+              {{#each posts}}
+                <h3>{{this.title}}</h3>
+                <p>
+                  {{{this.content}}}
+                </p>
+                <a href="/blog/{{this.slug}}" class="button c">Den ganzen Beitrag lesen..</a>
+              {{/each}}
+            {{else}}
+              <h1>No posts</h1>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+
     </div>
 
   </body>

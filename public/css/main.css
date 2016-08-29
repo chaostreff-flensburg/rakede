@@ -57,11 +57,14 @@ h1 {
 
 h2 {
   margin-top: 0.25em;
+  margin-bottom: -10px;
   font-size: 2.5em;
 }
 
 h3 {
   font-size: 2em;
+  margin-top: 10px;
+  margin-bottom: -16px;
 }
 
 p, span, a, b, i {
@@ -97,7 +100,7 @@ p, span, a, i {
   text-decoration: none;
   color: #ffffff;
   background-color: #272726;
-  padding: 8px;
+  padding: 4px;
   padding-left: 12px;
   padding-right: 12px;
   border-radius: 5px;
