@@ -13,6 +13,17 @@ router.use("/rakede", require("./backend"));
 router.use("/site", require("./cms"));
 
 router.get('/', function(req, res) {
+
+  // Function to shorten long paragraphs
+  // http://stackoverflow.com/a/1199420/6217283
+  String.prototype.trunc =
+       function( n, useWordBoundary ){
+           var isTooLong = this.length > n,
+               s_ = isTooLong ? this.substr(0,n-1) : this;
+           s_ = (useWordBoundary && isTooLong) ? s_.substr(0,s_.lastIndexOf(' ')) : s_;
+           return  isTooLong ? s_ + '&hellip;' : s_;
+        };
+
   var data = {layout:false,
     slackButton: "<a href='https://slack.com/oauth/authorize?scope=identity.basic,identity.team&client_id="+tokens.clientID+"&redirect_uri="+tokens.callbackURL+"'><img alt='Sign in with Slack' height='40' width='172' src='https://platform.slack-edge.com/img/sign_in_with_slack.png' srcset='https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x' /></a>"
   };
@@ -38,8 +49,9 @@ router.get('/', function(req, res) {
     }
   ], (err, result) => {
     if (err) res.end(500);
-    //slack button
 
+    // shorten Blogposts content
+    data.posts[0].content = data.posts[0].content.trunc(500, true);
     res.render('home', data);
   });
 });
