@@ -34,7 +34,7 @@ exports.createUser = function(id, name, callback) {
     time: r.now()
   };
   //insert user in db or update him if he already exists
-    r.table('user_user').insert(user, {conflict: "replace"}).run(connection, function(err, result) {
+    r.table('rakede_users').insert(user, {conflict: "replace"}).run(connection, function(err, result) {
       if (err) throw err;
       console.log(JSON.stringify(result, null, 2));
       callback(err, result);
@@ -43,7 +43,7 @@ exports.createUser = function(id, name, callback) {
 
 //get specific blog post via slug
 exports.getUser = function(id, callback) {
-    r.table('user_user').get(id).merge({time:r.row('time').toEpochTime()}).run(connection, function(err, result) {
+    r.table('rakede_users').get(id).merge({time:r.row('time').toEpochTime()}).run(connection, function(err, result) {
     if (err) throw err;
     callback(err, result);
   });

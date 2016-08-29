@@ -4,8 +4,7 @@
     "blog": ["posts", "categories"],
     "cms": ["sites", "menu"],
     "events": ["events"],
-    "rakede": ["users"],
-    "user" : ["user"]
+    "rakede": ["users"]
   },
   "delimiter": "_"
 }
