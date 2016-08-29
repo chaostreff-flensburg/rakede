@@ -1,6 +1,7 @@
 <h1>Blogeinträge</h1>
-{{#if posts}}
-  {{#each posts}}
+{{> menu}}
+{{#if data.posts}}
+  {{#each data.posts}}
     <h1>{{this.title}}</h1>
     <p>{{this.content}}</p>
     <p>Post written by {{this.author}}</p>

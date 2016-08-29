@@ -48,7 +48,7 @@ router.get('/', function(req, res) {
       });
     }
   ], (err, result) => {
-    if (err) res.end(500);
+    if (err) res.sendStatus(500);
 
     // shorten Blogposts content
     data.posts[0].content = data.posts[0].content.trunc(500, true);
@@ -80,7 +80,7 @@ router.get('/test', function(req, res) {
       });
     }
   ], (err, result) => {
-    if (err) res.end(500);
+    if (err) res.sendStatus(500);
     res.render('test_home', data);
   });
 });
