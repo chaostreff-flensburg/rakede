@@ -85,7 +85,7 @@ exports.getPost = function(slug, callback) {
 //get post by the following criteria: amount and age, order by age
 exports.getNewPosts = function(amount, callback) {
   amount = amount || 1;
-  r.table('blog_posts').orderBy('time').limit(amount).merge({time: r.row('time').toEpochTime()}).run(connection, function(err, cursor) {
+  r.table('blog_posts').orderBy(r.desc('time')).limit(amount).merge({time: r.row('time').toEpochTime()}).run(connection, function(err, cursor) {
     if (err) throw err;
     cursor.toArray(function(err, result) {
         if (err) throw err;
