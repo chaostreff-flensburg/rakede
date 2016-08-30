@@ -7,9 +7,9 @@ var users = require('../models/user.js');
   */
 module.exports = function checkSession(req, res, next) {
   //check for sesion variable
-  if (typeof req.session.name !== 'undefined') {
+  if (typeof req.session.userID !== 'undefined') {
     //lookup user
-    users.getUser(req.session.name, function(err, result) {
+    users.getUser(req.session.userID, function(err, result) {
       if(result) {
         //user found, continue connection
         next();

@@ -4,6 +4,7 @@ var moment = require("moment");
 var multer = require("multer");
 var path = require("path");
 var crypto = require("crypto");
+var chron = require('async');
 // require all modells
 var blog = require('../models/blog');
 var events = require('../models/events');
@@ -11,8 +12,30 @@ var cms = require('../models/cms');
 var checkSession = require("../middlewares/checkSession.js");
 
 router.get('/', checkSession, function(req, res) {
-  res.render('backend/dashboard', {
-    layout: "../backend/backend"
+  var data = {layout: "../backend/backend"};
+
+  chron.waterfall([
+    (callback) => {
+      cms.getMenu((menu) => {
+        data.menu = menu;
+        callback(null, data);
+      });
+    },
+    (data, callback) => {
+      blog.getNewPosts(1, (posts) => {
+        data.posts = posts;
+        callback(null, data);
+      });
+    },
+    (data, callback) => {
+      cms.getAllSites((sites) => {
+        data.sites = sites;
+        callback(null, data);
+      });
+    }
+  ], (err, result) => {
+    if (err) res.sendStatus(500);
+  res.render('backend/dashboard', data);
   });
 });
 
@@ -20,8 +43,14 @@ router.get('/', checkSession, function(req, res) {
 // Blogpost
 router.get('/newPost', checkSession, function(req, res, next) {
     res.render('backend/newBlogPost', {
-        title: "möp!"
+        author: req.session.userName
     });
+});
+
+router.get('/updatePost/:id', checkSession, function(req, res, next) {
+  blog.getPostByID(req.params.id, (post) => {
+      res.render('backend/newBlogPost', {post: post});
+  });
 });
 
 /* Route: Create Blog Post
@@ -37,9 +66,7 @@ Response:
 */
 router.post('/newPost', checkSession, function(req, res, next) {
     blog.createPost(req.body.author, req.body.content, req.body.title, req.body.category, function() {
-        res.render('backend/newBlogPost', {
-            title: "Submitted!"
-        });
+        res.redirect("/rakede");
     });
 });
 
@@ -55,10 +82,9 @@ Response:
 404: updating failed
 */
 router.post('/updatePost', checkSession, function(req, res, next) {
+  console.log(req.body);
     blog.updatePost(req.body.postID, req.body.content, req.body.title, req.body.category, function() {
-        res.render('home', {
-            title: "Blogeintrag aktualisiert!"
-        });
+        res.redirect("/rakede");
     });
 });
 
@@ -70,11 +96,9 @@ Response:
 200: blogpost deleted,
 404: deleting failed
 */
-router.post('/deletePost', checkSession, function(req, res, next) {
-    blog.deletePost(req.body.postID, function() {
-        res.render('home', {
-            title: "Blogeintrag gelöscht!"
-        });
+router.get('/deletePost/:id', checkSession, function(req, res, next) {
+    blog.deletePost(req.params.id, function() {
+        res.redirect('/rakede');
     });
 });
 

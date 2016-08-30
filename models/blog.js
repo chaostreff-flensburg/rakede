@@ -82,6 +82,14 @@ exports.getPost = function(slug, callback) {
   });
 };
 
+//get specific blog post via ID
+exports.getPostByID = function(id, callback) {
+    r.table('blog_posts').get(id).merge({time:r.row('time').toEpochTime()}).run(connection, function(err, result) {
+      if (err) throw err;
+      callback(result);
+  });
+};
+
 //get post by the following criteria: amount and age, order by age
 exports.getNewPosts = function(amount, callback) {
   amount = amount || 1;

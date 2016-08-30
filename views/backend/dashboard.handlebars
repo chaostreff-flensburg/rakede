@@ -1,6 +1,42 @@
 <div class="card">
-  <h2>Übersicht</h2>
+  <h2>Create</h2>
   <a class="button" href="/rakede/newPost">Create Blogpost</a>
   <a class="button c" href="/rakede/newEvent">Create Event</a>
   <a class="button m" href="/rakede/newSite">Create Site</a>
+</div>
+
+<div class="card">
+  <h2>Update/ Delete</h2>
+  <h3>Blogposts</h3>
+  {{#if posts}}
+    <ul>
+    {{#each posts}}
+      <li>
+        {{this.title}}  <a class="button c" href="/rakede/updatePost/{{this.id}}">Update Post</a> <a class="button m" href="/rakede/deletePost/{{this.id}}">Delete Post</a>
+      </li>
+    {{/each}}
+    </ul>
+  {{/if}}
+
+  <h3>Events</h3>
+  {{#if events}}
+    <ul>
+    {{#each events}}
+      <li>
+        {{this.title}}  <a class="button c" href="/rakede/updateEvent/{{this.id}}">Update Event</a> <a class="button m" href="/rakede/deleteEvent/{{this.id}}">Delete Event</a>
+      </li>
+    {{/each}}
+    </ul>
+  {{/if}}
+
+  <h3>Sites</h3>
+  {{#if sites}}
+    <ul>
+    {{#each sites}}
+      <li>
+        {{this.title}}  <a class="button c" href="/rakede/updateSite/{{this.id}}">Update Site</a> <a class="button m" href="/rakede/deleteSite/{{this.id}}">Delete Site</a>
+      </li>
+    {{/each}}
+    </ul>
+  {{/if}}
 </div>

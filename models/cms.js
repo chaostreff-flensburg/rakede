@@ -56,7 +56,6 @@ exports.createSite = function(title, content, callback) {
   //insert blog object into db
     r.table('cms_sites').insert([site]).run(connection, function(err, result) {
       if (err) throw err;
-      console.log(JSON.stringify(result, null, 2));
       callback();
   });
 };
@@ -67,8 +66,18 @@ exports.getSite = function(slug, callback) {
       if (err) throw err;
       cursor.toArray(function(err, result) {
           if (err) throw err;
-          console.log(JSON.stringify(result, null, 2));
           callback(err, result);
+      });
+  });
+};
+
+//get all sites
+exports.getAllSites = function(callback) {
+    r.table('cms_sites').run(connection, function(err, cursor) {
+      if (err) throw err;
+      cursor.toArray(function(err, result) {
+          if (err) throw err;
+          callback(result);
       });
   });
 };
@@ -86,7 +95,6 @@ exports.updatePost = function(slug, title, content, callback) {
 exports.deleteSite = function(slug, callback) {
   r.table('cms_sites').get(slug).delete().run(connection, function(err, result) {
     if (err) throw err;
-    console.log(JSON.stringify(result, null, 2));
     callback();
   });
 };

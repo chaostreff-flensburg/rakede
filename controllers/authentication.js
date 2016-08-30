@@ -26,7 +26,8 @@ router.get('/callback',
     else {
       // Successful authentication
       //set session cookie
-      req.session.name = req.user.id;
+      req.session.userID = req.user.id;
+      req.session.userName = req.user.username;
       //create user if he does not exist yet
       users.createUser(req.user.id, req.user.username, function(err, res) {
       });
