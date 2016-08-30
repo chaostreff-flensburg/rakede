@@ -12,7 +12,7 @@
     <ul>
     {{#each posts}}
       <li>
-        {{this.title}}  <a class="button c" href="/rakede/updatePost/{{this.id}}">Update Post</a> <a class="button m" href="/rakede/deletePost/{{this.id}}">Delete Post</a>
+        {{this.title}}  <a class="button" href="/blog/{{this.slug}}">View Post</a> <a class="button c" href="/rakede/updatePost/{{this.id}}">Update Post</a> <a class="button m" href="/rakede/deletePost/{{this.id}}">Delete Post</a>
       </li>
     {{/each}}
     </ul>

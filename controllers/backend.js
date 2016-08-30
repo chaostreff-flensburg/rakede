@@ -16,14 +16,14 @@ router.get('/', checkSession, function(req, res) {
 
   chron.waterfall([
     (callback) => {
-      cms.getMenu((menu) => {
-        data.menu = menu;
+      blog.getAllPosts((posts) => {
+        data.posts = posts;
         callback(null, data);
       });
     },
     (data, callback) => {
-      blog.getNewPosts(1, (posts) => {
-        data.posts = posts;
+      events.getAllEvents((events) => {
+        data.events = events;
         callback(null, data);
       });
     },
