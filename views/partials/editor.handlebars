@@ -1,4 +1,4 @@
-<textarea name="content" id="content">{{#if post}}{{post.content}}{{else}}This is a TinyMCE-Editor. Nice.{{/if}}</textarea>
+<textarea name="content" id="content">{{#if post}}{{post.content}}{{else if site}}{{site.content}}{{else}}This is a TinyMCE-Editor. Nice.{{/if}}</textarea>
 
 <script src="/js/tinymce/tinymce.min.js"></script>
 <script>

@@ -40,7 +40,8 @@ router.get('/', checkSession, function(req, res) {
 });
 
 
-// Blogpost
+/*------------------- BLOG  ---------------------------*/
+
 router.get('/newPost', checkSession, function(req, res, next) {
     res.render('backend/newBlogPost', {
         author: req.session.userName
@@ -129,10 +130,11 @@ router.post('/newEvent', checkSession, function(req, res, next) {
 });
 
 
-// CMS
+/*----------------  CMS ----------------------------------*/
+
 router.get('/newSite', checkSession, function(req, res, next) {
   res.render('backend/newSite', {
-    title: "möp!"
+    author: req.session.userName
   });
 });
 
@@ -144,8 +146,37 @@ router.post('/newSite', checkSession, function(req, res, next) {
   });
 });
 
+router.get('/updateSite/:id', checkSession, function(req, res, next) {
+  cms.getSiteByID(req.params.id, (site) => {
+    console.log(site);
+    res.render('backend/newSite', {
+      site: site
+    });
+  });
+});
 
-// File Upload
+router.post('/updateSite', checkSession, function(req, res, next) {
+  cms.updateSite(req.body.siteID, req.body.title, req.body.content, function() {
+    res.redirect("/rakede");
+  });
+});
+
+/* Route: Delete Site
+Request:
+siteID: uuid
+
+Response:
+200: site deleted,
+404: deleting failed
+*/
+router.get('/deleteSite/:id', checkSession, function(req, res, next) {
+    cms.deleteSite(req.params.id, function() {
+        res.redirect('/rakede');
+    });
+});
+
+/*-------------------------File Upload---------------------------------*/
+
 var storage = multer.diskStorage({
   destination: __dirname + '/../public/upload/',
   filename: function (req, file, cb) {

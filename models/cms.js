@@ -71,6 +71,14 @@ exports.getSite = function(slug, callback) {
   });
 };
 
+//get specific site by id
+exports.getSiteByID = function(id, callback) {
+    r.table('cms_sites').get(id).run(connection, function(err, result) {
+      if (err) throw err;
+      callback(result);
+  });
+};
+
 //get all sites
 exports.getAllSites = function(callback) {
     r.table('cms_sites').run(connection, function(err, cursor) {
@@ -83,8 +91,8 @@ exports.getAllSites = function(callback) {
 };
 
 //update site
-exports.updatePost = function(slug, title, content, callback) {
-  r.table('cms_sites').get(slug).update({content: content, title: title, slug: slug(title)}).run(connection, function(err, result) {
+exports.updateSite = function(id, title, content, callback) {
+  r.table('cms_sites').get(id).update({content: content, title: title, slug: slug(title)}).run(connection, function(err, result) {
     if (err) throw err;
     console.log(JSON.stringify(result, null, 2));
     callback();
@@ -92,8 +100,8 @@ exports.updatePost = function(slug, title, content, callback) {
 };
 
 //delete site
-exports.deleteSite = function(slug, callback) {
-  r.table('cms_sites').get(slug).delete().run(connection, function(err, result) {
+exports.deleteSite = function(id, callback) {
+  r.table('cms_sites').get(id).delete().run(connection, function(err, result) {
     if (err) throw err;
     callback();
   });

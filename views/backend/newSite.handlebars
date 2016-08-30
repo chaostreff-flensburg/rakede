@@ -1,8 +1,20 @@
+{{#if site}}
+<h1>Update Site</h1>
+
+<form method="post" action="/rakede/updateSite">
+  <textarea name="title" rows="1" cols="50">{{site.title}}</textarea>
+  {{> editor}}
+  <input type="hidden" name="author" value="{{author}}">
+  <input type="hidden" name="siteID" value="{{site.id}}">
+  <input type="submit" name="submit" value="Save">
+</form>
+{{else}}
 <h1>Create new Site</h1>
 
 <form method="post">
   <textarea name="title" rows="1" cols="50">Sitetitle</textarea>
   {{> editor}}
-  <input type="hidden" name="author" value="123">
+  <input type="hidden" name="author" value="{{author}}">
   <input type="submit" name="submit" value="Save">
 </form>
+{{/if}}

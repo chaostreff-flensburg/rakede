@@ -34,7 +34,7 @@
     <ul>
     {{#each sites}}
       <li>
-        {{this.title}}  <a class="button c" href="/rakede/updateSite/{{this.id}}">Update Site</a> <a class="button m" href="/rakede/deleteSite/{{this.id}}">Delete Site</a>
+        {{this.title}}  <a class="button" href="/site/{{this.slug}}">View Site</a> <a class="button c" href="/rakede/updateSite/{{this.id}}">Update Site</a> <a class="button m" href="/rakede/deleteSite/{{this.id}}">Delete Site</a>
       </li>
     {{/each}}
     </ul>
