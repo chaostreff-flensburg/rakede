@@ -126,14 +126,14 @@ var storage = multer.diskStorage({
   destination: __dirname + '/../public/upload/',
   filename: function (req, file, cb) {
     crypto.pseudoRandomBytes(16, function (err, raw) {
-      if (err) return cb(err)
+      if (err) return cb(err);
 
-      cb(null, raw.toString('hex') + path.extname(file.originalname))
-    })
+      cb(null, raw.toString('hex') + path.extname(file.originalname));
+    });
   }
-})
+});
 
-var upload = multer({ storage: storage })
+var upload = multer({ storage: storage });
 
 router.post('/upload', upload.single('file'), function(req, res) {
   console.log("File uploaded:");
@@ -141,6 +141,6 @@ router.post('/upload', upload.single('file'), function(req, res) {
 
   var fileUrl = "/upload/" + req.file.filename;
   res.json({ location: fileUrl });
-})
+});
 
 module.exports = router;
