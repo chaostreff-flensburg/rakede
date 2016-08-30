@@ -49,9 +49,11 @@ router.get('/', function(req, res) {
     }
   ], (err, result) => {
     if (err) res.sendStatus(500);
-
-    // shorten Blogposts content
-    data.posts[0].content = data.posts[0].content.trunc(500, true);
+    console.log(data);
+    // shorten Blogposts content if it is not empty
+    if(typeof data.posts[0] !== 'undefined') {
+      data.posts[0].content = data.posts[0].content.trunc(500, true);
+    }
     res.render('home', data);
   });
 });

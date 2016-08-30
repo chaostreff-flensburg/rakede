@@ -5,7 +5,7 @@ var users = require('../models/user.js');
 
 
 router.get('/',
-  passport.authenticate('slack', {team: "T03JL4VF6", failureRedirect: '/' }));
+  passport.authenticate('slack', {failureRedirect: '/' }));
 
   router.get('/logout', function(req, res) {
     //destroy session
@@ -16,7 +16,7 @@ router.get('/',
 
 //callback route for token negotiation (has to be defined in passport config and slack app!)
 router.get('/callback',
-  passport.authenticate('slack', {team: "T03JL4VF6", failureRedirect: '/' }),
+  passport.authenticate('slack', {failureRedirect: '/' }),
   function(req, res) {
     // only allow users from specified slack-team
     if (req.user.teamId != 'T03JL4VF6') {

@@ -60,8 +60,8 @@ router.post('/signup', function(req, res) {
                 userFound = true;
             }
         });
-        //if user has not signed up before, start signup process, else return 404
-        if (!userFound) {
+        //if user has not signed up before and there are free places left, start signup process, else return 404
+        if (!userFound && event.maxParticipants > event.participants.length) {
             //add user to event
             var mailSent = false;
 
