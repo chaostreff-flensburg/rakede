@@ -46,10 +46,36 @@ module.exports = () => {
                 if (err) {
                     console.log('ERR: Database setup failed!');
                 } else {
-                    console.log('Database ready!');
-                    connection.close();
+                    //insert basic menu object if not existent
+                    var menu = {
+                        id: 1,
+                        x: [{
+                            title: "Home",
+                            url: "",
+                            y: []
+                        }, {
+                            title: "Blog",
+                            url: "blog",
+                            y: []
+                        }, {
+                            title: "Seiten",
+                            url: "",
+                            y: []
+                        }, {
+                            title: "Events",
+                            url: "events",
+                            y: []
+                        }]
+                    };
+
+                    r.db(dbstructure.name).table('cms_menu').insert(menu, {
+                        conflict: "error"
+                    }).run(connection, function(err, res) {
+                        console.log('Database ready!');
+                        connection.close();
+                    });
                 }
             });
         });
     });
-}
+};

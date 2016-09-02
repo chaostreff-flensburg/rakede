@@ -31,9 +31,7 @@ chron.waterfall([
 ], (err, result) => {
   if (err) res.sendStatus(500);
   //slack button
-    res.render('home', {
-      data: data
-    });
+    res.render('home', data);
   });
 });
 
