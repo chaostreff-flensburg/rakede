@@ -5,6 +5,7 @@ var multer = require("multer");
 var path = require("path");
 var crypto = require("crypto");
 var chron = require('async');
+var slug = require('slug');
 // require all modells
 var blog = require('../models/blog');
 var events = require('../models/events');
@@ -66,7 +67,42 @@ Response:
 404: creating failed
 */
 router.post('/newPost', checkSession, function(req, res, next) {
-    blog.createPost(req.body.author, req.body.content, req.body.title, req.body.category, function() {
+  var data = {layout: "../backend/backend"};
+
+  chron.waterfall([
+    (callback) => {
+      blog.createPost(req.body.author, req.body.content, req.body.title, req.body.category, (result) => {
+        data.key = result.generated_keys[0];
+        callback(null, data);
+      });
+    },
+    (data, callback) => {
+      cms.getMenu((menu) => {
+        //create new menu entry
+        var newMenuPoint = {
+          id: data.key,
+          title: req.body.title,
+          url: "/blog/"+slug(req.body.title)
+        };
+
+        //add new entry to y at blog
+        menu.x.forEach((e, i, a) => {
+          if(e.title == "Blog") {
+            e.y.push(newMenuPoint);
+          }
+        });
+        data.menu = menu;
+        callback(null, data);
+      });
+    },
+    (data, callback) => {
+      //update menu
+      cms.updateMenu(data.menu, () => {
+        callback(null, data);
+      });
+    }
+  ], (err, result) => {
+    if (err) res.sendStatus(500);
         res.redirect("/rakede");
     });
 });
@@ -83,8 +119,40 @@ Response:
 404: updating failed
 */
 router.post('/updatePost', checkSession, function(req, res, next) {
-  console.log(req.body);
-    blog.updatePost(req.body.postID, req.body.content, req.body.title, req.body.category, function() {
+  var data = {layout: false};
+
+  chron.waterfall([
+    (callback) => {
+      blog.updatePost(req.body.postID, req.body.content, req.body.title, req.body.category, function() {
+        callback(null, data);
+      });
+    },
+    (data, callback) => {
+      cms.getMenu((menu) => {
+
+        //update menu entry
+        menu.x.forEach((e, i, a) => {
+          if(e.title == "Blog") {
+            e.y.forEach((ele, ind, arr) => {
+              if(ele.id == req.body.postID) {
+                ele.title = req.body.title;
+                ele.url = "/blog/"+slug(req.body.title);
+              }
+            });
+          }
+        });
+        data.menu = menu;
+        callback(null, data);
+      });
+    },
+    (data, callback) => {
+      //update menu
+      cms.updateMenu(data.menu, () => {
+        callback(null, data);
+      });
+    }
+  ], (err, result) => {
+    if (err) res.sendStatus(500);
         res.redirect("/rakede");
     });
 });
@@ -98,7 +166,38 @@ Response:
 404: deleting failed
 */
 router.get('/deletePost/:id', checkSession, function(req, res, next) {
+  var data = {layout: false};
+
+  chron.waterfall([
+    (callback) => {
     blog.deletePost(req.params.id, function() {
+        callback(null, data);
+      });
+    },
+    (data, callback) => {
+      cms.getMenu((menu) => {
+        //delete menu entry
+        menu.x.forEach((e, i, a) => {
+          if(e.title == "Blog") {
+            e.y.forEach((ele, ind, arr) => {
+              if(ele.id == req.params.id) {
+                arr.splice(ind, 1);
+              }
+            });
+          }
+        });
+        data.menu = menu;
+        callback(null, data);
+      });
+    },
+    (data, callback) => {
+      //update menu
+      cms.updateMenu(data.menu, () => {
+        callback(null, data);
+      });
+    }
+  ], (err, result) => {
+        if (err) res.sendStatus(500);
         res.redirect('/rakede');
     });
 });

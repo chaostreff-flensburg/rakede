@@ -26,6 +26,7 @@ r.connect( {host: 'localhost', port: 28015, db: 'rakede'}, function(err, conn) {
     url: string,
     y: [
     {
+    id: uuid,
     title: string,
     url: string
   }

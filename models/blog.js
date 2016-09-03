@@ -54,7 +54,7 @@ exports.createPost = function(user, content, title, category, callback) {
     r.table('blog_posts').insert([blogPost]).run(connection, function(err, result) {
       if (err) throw err;
       console.log(JSON.stringify(result, null, 2));
-      callback();
+      callback(result);
   });
 };
 
