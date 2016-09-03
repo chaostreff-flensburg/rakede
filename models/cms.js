@@ -57,7 +57,7 @@ exports.createSite = function(title, content, callback) {
   //insert blog object into db
     r.table('cms_sites').insert([site]).run(connection, function(err, result) {
       if (err) throw err;
-      callback();
+      callback(result);
   });
 };
 

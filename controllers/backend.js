@@ -67,7 +67,7 @@ Response:
 404: creating failed
 */
 router.post('/newPost', checkSession, function(req, res, next) {
-  var data = {layout: "../backend/backend"};
+  var data = {layout: false};
 
   chron.waterfall([
     (callback) => {
@@ -238,10 +238,43 @@ router.get('/newSite', checkSession, function(req, res, next) {
 });
 
 router.post('/newSite', checkSession, function(req, res, next) {
-  cms.createSite(req.body.title, req.body.content, function() {
-    res.render('backend/newSite', {
-        title: "Submitted!"
-    });
+  var data = {layout: false};
+
+  chron.waterfall([
+    (callback) => {
+    cms.createSite(req.body.title, req.body.content, function(result) {
+        data.key = result.generated_keys[0];
+        callback(null, data);
+      });
+    },
+    (data, callback) => {
+      cms.getMenu((menu) => {
+        //create new menu entry
+        var newMenuPoint = {
+          id: data.key,
+          title: req.body.title,
+          url: "/site/"+slug(req.body.title)
+        };
+
+        //add new entry to y at sites
+        menu.x.forEach((e, i, a) => {
+          if(e.title == "Seiten") {
+            e.y.push(newMenuPoint);
+          }
+        });
+        data.menu = menu;
+        callback(null, data);
+      });
+    },
+    (data, callback) => {
+      //update menu
+      cms.updateMenu(data.menu, () => {
+        callback(null, data);
+      });
+    }
+  ], (err, result) => {
+    if (err) res.sendStatus(500);
+    res.redirect("/rakede");
   });
 });
 
@@ -255,7 +288,40 @@ router.get('/updateSite/:id', checkSession, function(req, res, next) {
 });
 
 router.post('/updateSite', checkSession, function(req, res, next) {
-  cms.updateSite(req.body.siteID, req.body.title, req.body.content, function() {
+  var data = {layout: false};
+
+  chron.waterfall([
+    (callback) => {
+    cms.updateSite(req.body.siteID, req.body.title, req.body.content, function() {
+        callback(null, data);
+      });
+    },
+    (data, callback) => {
+      cms.getMenu((menu) => {
+
+        //update menu entry
+        menu.x.forEach((e, i, a) => {
+          if(e.title == "Seiten") {
+            e.y.forEach((ele, ind, arr) => {
+              if(ele.id == req.body.siteID) {
+                ele.title = req.body.title;
+                ele.url = "/site/"+slug(req.body.title);
+              }
+            });
+          }
+        });
+        data.menu = menu;
+        callback(null, data);
+      });
+    },
+    (data, callback) => {
+      //update menu
+      cms.updateMenu(data.menu, () => {
+        callback(null, data);
+      });
+    }
+  ], (err, result) => {
+    if (err) res.sendStatus(500);
     res.redirect("/rakede");
   });
 });
@@ -269,7 +335,38 @@ Response:
 404: deleting failed
 */
 router.get('/deleteSite/:id', checkSession, function(req, res, next) {
-    cms.deleteSite(req.params.id, function() {
+  var data = {layout: false};
+
+  chron.waterfall([
+    (callback) => {
+  cms.deleteSite(req.params.id, function() {
+        callback(null, data);
+      });
+    },
+    (data, callback) => {
+      cms.getMenu((menu) => {
+        //delete menu entry
+        menu.x.forEach((e, i, a) => {
+          if(e.title == "Seiten") {
+            e.y.forEach((ele, ind, arr) => {
+              if(ele.id == req.params.id) {
+                arr.splice(ind, 1);
+              }
+            });
+          }
+        });
+        data.menu = menu;
+        callback(null, data);
+      });
+    },
+    (data, callback) => {
+      //update menu
+      cms.updateMenu(data.menu, () => {
+        callback(null, data);
+      });
+    }
+  ], (err, result) => {
+        if (err) res.sendStatus(500);
         res.redirect('/rakede');
     });
 });
