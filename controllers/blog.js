@@ -42,7 +42,8 @@ Response:
 200: {blogpost},
 404: no post/ fetching post failed
 */
-router.get('/:slug', function(req, res) {  var data = {};
+router.get('/:slug', function(req, res) {
+var data = {layout: "main"};
 
 chron.waterfall([
   (callback) => {
@@ -59,9 +60,7 @@ chron.waterfall([
   }
 ], (err, result) => {
   if (err) res.sendStatus(500);
-    res.render('blogpost', {
-      data: data
-    });
+    res.render('blogpost', data);
   });
 });
 
