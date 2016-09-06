@@ -51,15 +51,15 @@ module.exports = () => {
                         id: 1,
                         x: [{
                             title: "Home",
-                            url: "",
+                            url: "/",
                             y: []
                         }, {
                             title: "Blog",
-                            url: "blog",
+                            url: "/blog",
                             y: []
                         }, {
                             title: "Seiten",
-                            url: "",
+                            url: "/",
                             y: []
                         }, {
                             title: "Events",

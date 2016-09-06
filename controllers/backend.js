@@ -222,9 +222,7 @@ router.post('/newEvent', checkSession, function(req, res, next) {
     };
 
     events.createEvent(postedEvent.title, postedEvent.author, postedEvent.content, postedEvent.date, postedEvent.maxParticipants, function() {
-        res.render('backend/newEvent', {
-            title: "Submitted!"
-        });
+        res.redirect('/rakede');
     });
 });
 

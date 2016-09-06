@@ -30,9 +30,7 @@ chron.waterfall([
 if (err) res.sendStatus(500);
 
   console.log(data);
-    res.render('site', {
-      data: data
-    });
+    res.render('site', data);
   });
 });
 

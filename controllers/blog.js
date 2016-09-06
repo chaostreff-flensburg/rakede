@@ -4,6 +4,16 @@ var blog = require('../models/blog');
 var cms = require('../models/cms');
 var chron = require('async');
 
+// Function to shorten long paragraphs
+// http://stackoverflow.com/a/1199420/6217283
+String.prototype.trunc =
+     function( n, useWordBoundary ){
+         var isTooLong = this.length > n,
+             s_ = isTooLong ? this.substr(0,n-1) : this;
+         s_ = (useWordBoundary && isTooLong) ? s_.substr(0,s_.lastIndexOf(' ')) : s_;
+         return  isTooLong ? s_ + '&hellip;' : s_;
+      };
+      
 /* Route: / (fetch all blog posts)
 Request:
 
@@ -25,6 +35,12 @@ chron.waterfall([
     blog.getAllPosts((posts) => {
       data.posts = posts;
       callback(null, data);
+      //truncate posts
+      data.posts.forEach((e, i, a) => {
+        if(typeof e !== 'undefined') {
+          e.content = e.content.trunc(500, true);
+        }
+      });
     });
   }
 ], (err, result) => {
@@ -43,7 +59,7 @@ Response:
 404: no post/ fetching post failed
 */
 router.get('/:slug', function(req, res) {
-var data = {layout: "main"};
+var data = {};
 
 chron.waterfall([
   (callback) => {
@@ -60,6 +76,7 @@ chron.waterfall([
   }
 ], (err, result) => {
   if (err) res.sendStatus(500);
+  console.log(data);
     res.render('blogpost', data);
   });
 });

@@ -1,6 +1,10 @@
 {{#if post}}
-    <h1>{{post.title}}</h1>
-    <p>{{{post.content}}}</p>
-    <p>Post written by {{post.author}} @ {{post.time}}</p>
-    <hr>
+  <div class="col s12 m7 l6">
+    <div class="card">
+      <h1>{{post.title}}</h1>
+      <p>{{{post.content}}}</p>
+      <br>
+      <h3>Geschrieben von {{post.author}} am {{post.time}}</h3>
+    </div>
+  </div>
 {{/if}}

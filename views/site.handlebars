@@ -1,5 +1,8 @@
-{{#if data.site}}
-{{> menu}}
-<h1>{{data.site.title}}</h1>
-{{{data.site.content}}}
+{{#if site}}
+<div class="col s12 m7 l6">
+  <div class="card">
+    <h1>{{site.title}}</h1>
+    {{{site.content}}}
+  </div>
+</div>
 {{/if}}
