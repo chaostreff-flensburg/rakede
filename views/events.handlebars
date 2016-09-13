@@ -1,0 +1,30 @@
+{{#if events}}
+    {{#each events}}
+        <div class="col s12 m7 l6">
+            <div class="card">
+                <h1>{{this.name}}</h1>
+                <p>Am {{this.time}}</p>
+                <p>Maximale Teilnehmerzahl: {{this.maxParticipants}}</p>
+                <p>Leiter: {{this.author}}</p>
+                <p>{{{this.description}}}</p>
+                <a class="button c" onclick="javascript: document.getElementById('loginForm_{{this.id}}').style.display = 'block';">Teilnehmen</a>
+                <!-- login form -->
+                <div id="loginForm_{{this.id}}" style="display:none">
+                    <div class="col s12 m7 l6">
+                        <div class="card">
+                            <fieldset>
+                                <legend>An {{this.name}} teilnehmen</legend>
+                                <form method="POST" action="/events/signup">
+                                    <input type="text" name="email" placeholder="Email">
+                                    <input type="text" name="name" placeholder="Name">
+                                    <input type="hidden" name="event" value="{{this.id}}">
+                                    <input type="submit" value="Teilnehmen">
+                                </form>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{/each}}
+{{/if}}

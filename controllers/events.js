@@ -13,7 +13,7 @@ Response:
 404: no posts/ fetching events failed
 */
 router.get('/', function(req, res) {
-  var data = {};
+  var data = {layout: 'main'};
 
 chron.waterfall([
   (callback) => {
@@ -31,7 +31,7 @@ chron.waterfall([
 ], (err, result) => {
   if (err) res.sendStatus(500);
   //slack button
-    res.render('home', data);
+    res.render('events', data);
   });
 });
 
@@ -49,7 +49,7 @@ router.post('/signup', function(req, res) {
     //check if user is already participating
     var userFound = false;
     //get event
-    events.getEvents(req.body.event, function(event) {
+    events.getEvent(req.body.event, function(event) {
         //if event has not been found, send 404
         if (!event) res.sendStatus(404);
         //check if user has already signed up before
@@ -77,10 +77,10 @@ router.post('/signup', function(req, res) {
                 //bestätigung eventteilnahme
                 var mailOptions = {
                     from: '"Chaostreff Flensburg" <events@chaostreff-flensburg.de>', // sender address
-                    to: participant.email, // list of receivers
+                    to: req.body.email, // list of receivers
                     subject: 'Teilnahme an ' + event.name, // Subject line
-                    text: 'Hallo ' + participant.name + '!', // plaintext body
-                    html: '<b>Hallo ' + participant.name + '! Um deine Teilnahme am Event ' + event.name + ' zu bestätigen, klicke auf diesen <a href=' + verifyLink + '>Link:</a>.</b>' // html body
+                    text: 'Hallo ' + req.body.name + '!', // plaintext body
+                    html: '<b>Hallo ' + req.body.name + '! Um deine Teilnahme am Event ' + event.name + ' zu bestätigen, klicke auf diesen <a href=' + verifyLink + '>Link:</a>.</b>' // html body
                 };
 
                 // send mail with defined transport object
@@ -97,7 +97,7 @@ router.post('/signup', function(req, res) {
                     }
                 });
                 //success
-                res.sendStatus(200);
+                res.redirect("/events");
             });
             //save new participant
         } else {

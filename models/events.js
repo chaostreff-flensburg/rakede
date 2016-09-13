@@ -140,7 +140,7 @@ exports.addParticipantToEvent = function(uuid, name, email, callback) {
       verified: false
   };
 
-  r.table('events_events').get(uuid)('participants').update( function(row) {
+  r.table('events_events').get(uuid).update( function(row) {
   return {participants: row('participants').append(participant)};}, {
     nonAtomic: true
   }).run(connection, function(err, result) {

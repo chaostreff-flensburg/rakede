@@ -1,0 +1,11 @@
+{{#if event}}
+  <div class="col s12 m7 l6">
+    <div class="card">
+      <h1>{{event.name}}</h1>
+      <p>Am {{event.time}}</p>
+      <p>Maximale Teilnehmerzahl: {{event.maxParticipants}}</p>
+      <p>Leiter: {{event.author}}</p>
+      <p>{{{event.description}}}</p>
+    </div>
+  </div>
+{{/if}}
