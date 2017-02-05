@@ -2,30 +2,16 @@
 
 ## Getting Started
 
-To run rakede you need an instance of RethinkDB and a somewhat up to date version of node. On macOS with Homebrew or your favorite linux-distro with linuxbrew run:
+``` bash
+# install dependencies
+$ npm install # Or yarn install
 
-    brew install rethinkdb
-    rethinkdb
+# serve with hot reload at localhost:3000
+$ npm run dev
 
-You can find documentation on installing RethinkDB with your package manager of choice [in the RethinkDB documentation](https://www.rethinkdb.com/docs/install/). It runs on pretty much everything.  
-After that clone the repo, `cd` into it and run:
-
-    npm install
-
-You need credentials for your OAuth Provider. Insert them in a `token.json` like this:
-
-
-    {
-      "clientID": "$YOUR_CLIENT_ID",
-      "clientSecret": "$YOUR_SECRET",
-      "callbackURL":  "http://localhost:8081/login/callback"
-    }
-
-Now you can finally start the app with:
-
-    npm start
-
-The rakede now fires up its engines and reloads automatically on file changes. You can find your instance running on [localhost:8081](http://localhost:8081/).
+# build for production and launch server
+$ npm start
+```
 
 ## Changelog
 

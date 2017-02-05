@@ -1,5 +1,12 @@
-rethinkdb_data
+# dependencies
 node_modules
-config/tokens.json
-.jshintrc
-public/upload/
+rethinkdb_data
+
+# logs
+npm-debug.log
+
+# Nuxt build
+.nuxt
+
+# Nuxt generate
+dist
