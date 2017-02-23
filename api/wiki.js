@@ -5,7 +5,6 @@ var marked = require('marked');
 /* GET article by slug. */
 router.get('/wiki/:slug', function (req, res, next) {
   fs.readFile(__dirname + '/../content/' + req.params.slug + '.md', 'utf8', (err, data) => {
-    console.log(data);
     if (err) res.sendStatus(404);
     else {
       var article = {
