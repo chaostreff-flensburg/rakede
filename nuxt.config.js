@@ -16,7 +16,7 @@ module.exports = {
   /*
   ** Global CSS
   */
-  css: ['~assets/css/main.css'],
+  css: ['~assets/css/main.css', '../node_modules/highlight.js/styles/monokai-sublime.css'],
   /*
   ** Add axios globally
   */
