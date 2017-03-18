@@ -10,7 +10,6 @@
 
 <script>
 import axios from '~plugins/axios'
-import hljs from 'highlight.js'
 
 export default {
   name: 'slug',
@@ -22,9 +21,6 @@ export default {
     .catch((e) => {
       error({ statusCode: 404, message: 'Article not found' })
     })
-  },
-  mounted() {
-    hljs.initHighlightingOnLoad();
   }
 }
 </script>
