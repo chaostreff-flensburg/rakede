@@ -1,11 +1,9 @@
 # ToDo:
-- [ ] Main Goal: SSR Articles, make most of rakede work w/o JS
 - [ ] parse markdown articles only once on change and not on every request
-  - hold .md or .vue files in seperate content repo
+  - hold .md files in seperate content repo
   - parse front-matter meta data with grey-matter
   - syntax highlight on html creation
-  - generate .vue files from markdown or load them directly
-  - build nuxt bundle
+  - store into nedb
 - [ ] create logic for feature categories & pages
   - categories from tags
   - homepage
@@ -15,14 +13,11 @@
   - anonymous pull-req via github api or authenticated merge
 - [ ] authentication
   - passwordless auth-flow via mail, telegram, slack, etc
-  - nedb mainly for auth-store
+  - nedb for auth-store
 
 
 ## Ideas
 
-- Plugin interface
-  - .vue files are rendered on server, so we can use custom html tags in our articles
-  - load components through front-matter object in .md file, or import directly in .vue
 - dynamic layouts with nuxt 0.10
 - article specific highlight color
 - pwa
