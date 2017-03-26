@@ -1,6 +1,6 @@
-var router = require('express').Router();
-var fs = require('fs');
-var marked = require('marked');
+var router = require('express').Router()
+var fs = require('fs')
+var marked = require('marked')
 
 /* GET article by slug. */
 router.get('/wiki/:slug', function (req, res, next) {
