@@ -11,8 +11,6 @@
 import axios from '~plugins/axios'
 
 export default {
-  async data () {
-  },
   head () {
     return {
       title: 'rakede'
