@@ -1,4 +1,5 @@
 # ToDo:
+- [ ] Main Goal: SSR Articles, make most of rakede work w/o JS
 - [ ] parse markdown articles only once on change and not on every request
   - hold .md files in seperate content repo
   - parse front-matter meta data with grey-matter
