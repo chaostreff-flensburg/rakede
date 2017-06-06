@@ -19,7 +19,9 @@ module.exports = {
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
     // do not allow console.logs etc...
-    'no-console': 2
+    'no-console': 2,
+    // allow missing space before function parenthesises
+    'space-before-function-paren': 0
   },
   globals: {}
 }
