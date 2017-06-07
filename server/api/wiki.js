@@ -6,12 +6,12 @@ const path = require('path')
 const marked = require('marked')
 const matter = require('gray-matter')
 
-const contentFolder = path.resolve(__dirname + '/../content/')
+const contentFolder = path.resolve(__dirname + '/../../content')
 
 
 /* GET article by slug. */
 router.get('/wiki/:slug', function (req, res, next) {
-  fs.readFile(__dirname + '/../content/' + req.params.slug + '.md', 'utf8', (err, data) => {
+  fs.readFile(contentFolder + '/' + req.params.slug + '.md', 'utf8', (err, data) => {
     if (err) res.sendStatus(404)
     else {
       var article = {
