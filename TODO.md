@@ -4,7 +4,7 @@
   - hold .md files in seperate content repo
   - parse front-matter meta data with grey-matter
   - syntax highlight on html creation
-  - store into nedb
+  - ~~store into nedb~~ LRU-Cache is good enough
 - [ ] create logic for feature categories & pages
   - categories from tags
   - homepage
@@ -15,6 +15,12 @@
 - [ ] authentication
   - passwordless auth-flow via mail, telegram, slack, etc
   - nedb for auth-store
+
+## Fonts
+
+Raleway (Bold) R B SlantedI
+Noto Serif R I B BI
+https://feathericons.com/
 
 
 ## Ideas
