@@ -1,9 +1,5 @@
 <template>
   <section class="container">
-
-    <!-- <nuxt-link to="/wiki/test">
-      testpage
-    </nuxt-link> -->
   </section>
 </template>
 
