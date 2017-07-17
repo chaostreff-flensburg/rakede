@@ -1,9 +1,5 @@
 <template>
   <section class="container">
-    <h1 class="title">
-      Wiki
-    </h1>
-    <hr>
     <div v-html="article.content"></div>
   </section>
 </template>
