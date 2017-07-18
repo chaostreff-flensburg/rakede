@@ -3,6 +3,10 @@
 ## Getting Started
 
 ``` bash
+# node >= 8.0.0 needed
+# if you are on an older version:
+# npm i -g n && n stable
+
 # install dependencies
 $ npm install # Or yarn install
 
