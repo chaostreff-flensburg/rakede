@@ -11,36 +11,36 @@ const contentFolder = path.resolve(__dirname + '/../../content')
 
 /* GET article by slug. */
 router.get('/wiki/:slug', function (req, res, next) {
-  fs.readFile(contentFolder + '/' + req.params.slug + '.md', 'utf8', (err, data) => {
-    if (err) res.sendStatus(404)
-    else {
-      var article = {
-        content: marked(data)
-      }
+  getArticle(req.params.slug)
+    .then((article) => {
       res.json(article);
-    }
-  });
+    })
+    .catch((err) => {
+      res.sendStatus(404);
+    })
 })
 
-/* markdown parsing */
-async function parse(markdown, path) {
-  rawArticle = await matter(markdown)
-  article = {
+
+
+async function getArticle(slug) {
+  let data = await read(contentFolder + '/' + slug + '.md');
+  let rawArticle = await matter(data);
+  let article = {
     title: rawArticle.data.title,
-    path: path,
     cat: rawArticle.data.cat,
     img: rawArticle.data.img,
     content: rawArticle.content,
     html: await marked(rawArticle.content)
   }
-  return article
+  return article;
 }
 
 // wrap file reading in promise, b/c i can not be asked to use callbacks
+// @TODO: use util.promisify() as we are on node 8 anyway
 function read(path) {
   return new Promise((resolve, reject) => {
-    fs.readFile(path, 'utf8', (err, markdown) => {
-      resolve(markdown)
+    fs.readFile(path, 'utf8', (err, data) => {
+      resolve(data)
     })
   })
 }
