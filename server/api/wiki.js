@@ -14,13 +14,13 @@ const contentFolder = path.resolve(__dirname + '/../../content')
 
 
 /* GET featured articles */
-// @TODO: fetured.json on same fs-level
+// @TODO: featured.json on same fs-level
 router.get('/wiki/featured', (req, res, next) => {
   readDir(contentFolder + '/')
     .then(async (files) => {
       let articles = await Promise.all(files.map(async (file) => {
         let markdown = await read(contentFolder + '/' + file, 'UTF8');
-        return await parseArticle(markdown);
+        return await parseArticle(markdown, file.slice(0,-3));
       }));
       res.json(articles);
     })
@@ -33,7 +33,7 @@ router.get('/wiki/featured', (req, res, next) => {
 router.get('/wiki/:slug', async (req, res, next) => {
   let file = await read(contentFolder + '/' + req.params.slug + '.md', 'UTF8')
     .catch((err) => {});
-  parseArticle(file)
+  parseArticle(file, req.params.slug)
     .then((article) => {
       res.json(article);
     })
@@ -44,12 +44,13 @@ router.get('/wiki/:slug', async (req, res, next) => {
 
 
 
-async function parseArticle(markdown) {
+async function parseArticle(markdown, slug) {
   let rawArticle = await matter(markdown);
   let article = {
     title: rawArticle.data.title,
     cat: rawArticle.data.cat,
     img: rawArticle.data.img,
+    slug: slug,
     content: rawArticle.content,
     html: await marked(rawArticle.content)
   }
