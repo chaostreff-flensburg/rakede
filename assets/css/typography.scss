@@ -28,6 +28,7 @@ h1 {
 }
 h2 {
   font-size: 2em;
+  margin-bottom: 0.5em;
 }
 h3 {
   font-size: 1.375em;
@@ -81,4 +82,35 @@ blockquote > p {
   font-style: italic;
   color: rgba(0,0,0,.6);
   text-indent: -.32em;
+}
+
+/*=== SUBTITLES & ABSTRACTS ===*/
+
+.abstract {
+  color: rgba(0,0,0,.44);
+  font-size: 14px;
+  font-family: 'Raleway', sans-serif;
+
+  margin-top: 4px;
+
+  * {
+    font: inherit;
+    margin: 0;
+  }
+}
+
+/*=== HELPERS ===*/
+
+.txt-left {
+  float: left;
+  text-align: left;
+}
+
+.txt-center {
+  text-align: center;
+}
+
+.txt-right {
+  float: right;
+  text-align: right;
 }
