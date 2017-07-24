@@ -31,12 +31,12 @@ export default {
   },
   asyncData(context) {
     return axios.get('/api/wiki/featured')
-    .then((res) => {
-      return { featured: res.data }
-    })
-    .catch((e) => {
-      context.error({ statusCode: 404, message: 'Featured articles not found' })
-    })
+      .then((res) => {
+        return { featured: res.data }
+      })
+      .catch((e) => {
+        console.error({ statusCode: 500, message: 'Featured articles not found' })
+      })
   }
 }
 </script>
