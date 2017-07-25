@@ -1,20 +1,15 @@
 # ToDo:
 - [ ] Main Goal: SSR Articles, make most of rakede work w/o JS
-- [ ] parse markdown articles only once on change and not on every request
-  - hold .md files in seperate content repo
-  - parse front-matter meta data with grey-matter
-  - syntax highlight on html creation
-  - ~~store into nedb~~ LRU-Cache is good enough
-- [ ] create logic for feature categories & pages
-  - categories from tags
-  - homepage
-  - chronological news/blog
 - [ ] article editor
   - simplemde markdown editor
   - anonymous pull-req via github api or authenticated merge
-- [ ] authentication
-  - passwordless auth-flow via mail, telegram, slack, etc
-  - nedb for auth-store
+- [ ] events
+  - generate event from md/json
+  - multiple ticket types
+  - mass-mail
+  - stastics
+  - custom visitor questions, text/checkboxes
+  - sub-wiki
 
 ## Fonts
 
