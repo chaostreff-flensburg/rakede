@@ -1,17 +1,16 @@
 <template>
   <section class="container">
-    <div class="row">
-      <div class="col-12">
-        <h2>Wiki</h2>
-      </div>
+    <h2>Wiki</h2>
 
-      <div v-for="article in featured" class="col-6">
+    <div id="featured-wiki">
+      <!-- @TODO: fix layout on md display -->
+      <div class="card-wrapper" v-for="article in featured">
         <ArticleCard :title="article.title"
                      :content="article.html"
         ></ArticleCard>
       </div>
-
     </div>
+
   </section>
 </template>
 
@@ -41,6 +40,15 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+#featured-wiki {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  .card-wrapper {
+    flex-basis: 50%;
+  }
+}
 
 </style>
