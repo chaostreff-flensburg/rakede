@@ -7,6 +7,8 @@
       <div class="card-wrapper" v-for="article in featured">
         <ArticleCard :title="article.title"
                      :content="article.html"
+                     :image="article.img"
+                     :link="'/wiki/' + article.slug"
         ></ArticleCard>
       </div>
     </div>
