@@ -6,6 +6,9 @@
 - [ ] events
   - generate event from md/json
   - multiple ticket types
+    - set price
+    - choose your own
+    - contact us
   - mass-mail
   - stastics
   - custom visitor questions, text/checkboxes
