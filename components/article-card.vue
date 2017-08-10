@@ -1,10 +1,12 @@
 <template lang="html">
   <div class="wrapper">
-    <!-- @TODO: wrap image, heading, excerpt in link -->
+    <!-- @TODO: move card image to top on low width cards -->
     <div class="card-img" v-if="image" v-bind:style="{backgroundImage:'url('+image+')'}"></div>
     <div class="card-content">
-      <h4 class="card-title">{{title}}</h4>
-      <p class="abstract" v-html="abstract"></p>
+      <nuxt-link :to="link">
+        <h4 class="card-title">{{title}}</h4>
+        <div class="abstract" v-html="abstract"></div>
+      </nuxt-link>
       <span id="toolbar" class="right">
         <!-- @TODO: slideout text on hover -->
         <i class="icon-bookmark"></i> <!-- @TODO: save article in store -->
