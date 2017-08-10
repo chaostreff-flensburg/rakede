@@ -22,8 +22,8 @@ export default {
   props: ['title', 'content', 'image', 'link'],
   computed: {
     abstract() {
-      // regex linebreaks & remove them
-      let ab = this.content.replace(/(\r\n|\n|\r)/gm,"");
+      // regex html-tags & remove them
+      let ab = this.content.replace(/<\/?[^>]+(>|$)/g, "");
       if(ab.length > 200) {
         return ab.substring(0,199)+"...";
       }
