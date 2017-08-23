@@ -17,6 +17,5 @@ dist
 build
 
 # Content folders
+content
 db
-static/wiki
-static/event

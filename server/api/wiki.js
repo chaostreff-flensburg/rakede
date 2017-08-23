@@ -4,7 +4,7 @@ import * as content from './content.js'
 const router = Router()
 const path = require('path')
 
-const contentFolder = path.resolve(__dirname + '/../../static')
+const contentFolder = path.resolve(__dirname + '/../../content')
 
 
 /* GET featured articles */
