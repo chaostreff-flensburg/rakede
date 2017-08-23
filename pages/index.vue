@@ -4,13 +4,13 @@
 
     <div id="featured-wiki">
       <!-- @TODO: fix layout on md display -->
-      <div class="card-wrapper" v-for="article in featured">
-        <ArticleCard :title="article.title"
-                     :content="article.html"
-                     :image="article.img"
-                     :link="'/wiki/' + article.slug"
-        ></ArticleCard>
-      </div>
+      <ArticleCard v-for="article in featured"
+                   :title="article.title"
+                   :content="article.html"
+                   :image="article.img"
+                   :link="'/wiki/' + article.slug"
+                   :key="article.slug"
+      ></ArticleCard>
     </div>
 
   </section>
@@ -47,9 +47,11 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  align-items: stretch;
 
-  .card-wrapper {
-    flex-basis: 50%;
+  div {
+    flex-basis: 45%;
+    flex-grow: 1;
   }
 }
 

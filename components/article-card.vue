@@ -5,7 +5,7 @@
     <div class="card-content">
       <nuxt-link :to="link">
         <h4 class="card-title">{{title}}</h4>
-        <div class="abstract" v-html="abstract"></div>
+        <p class="abstract">{{abstract}}</p>
       </nuxt-link>
       <span id="toolbar" class="right">
         <!-- @TODO: slideout text on hover -->
@@ -42,7 +42,6 @@ export default {
   justify-content: space-around;
 
   min-width: 370px;
-  height: 220px;
 
   padding: 0 16px;
   padding-left: 0;
@@ -65,7 +64,6 @@ export default {
   }
 
   .card-img {
-    height: 100%;
     width: 100px;
 
     margin-right: auto;
@@ -76,6 +74,8 @@ export default {
 
   .card-content {
     width: 70%;
+
+    padding-bottom: 16px;
 
     margin-left: 8px;
 
