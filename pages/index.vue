@@ -17,9 +17,9 @@
 </template>
 
 <script>
-import axios from '~plugins/axios'
+import axios from '~/plugins/axios'
 
-import ArticleCard from '~components/article-card.vue';
+import ArticleCard from '~/components/article-card.vue';
 
 export default {
   components: {
@@ -36,7 +36,7 @@ export default {
         return { featured: res.data }
       })
       .catch((e) => {
-        console.error({ statusCode: 500, message: 'Featured articles not found' })
+        console.error(e)
       })
   }
 }
