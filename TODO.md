@@ -1,8 +1,9 @@
 # ToDo:
 - [ ] Main Goal: SSR Articles, make most of rakede work w/o JS
-  - [ ] convert markdown w/ frontmatter to json, load needed data as async component
-  - [ ] store user input in nedb out of the box
-  - [ ] choose your own database when needed
+  - convert markdown w/ frontmatter to json, load needed data as async component
+    - generate abstract, full file; choose with webpack dynamic imports
+  - store user input in nedb out of the box
+  - choose your own database when needed
 - [ ] article editor
   - simplemde markdown editor
   - anonymous pull-req via github api or authenticated merge
@@ -30,7 +31,9 @@ https://feathericons.com/
 
 ## Ideas
 
-- article specific highlight color
+- article specific highlight color, color scheme logic based on hsv
+- popup articles from frontpage á la product hunt
+- dynamically loaded hover article previews
 
 
 ## Links & Inspiration
