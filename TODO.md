@@ -1,5 +1,8 @@
 # ToDo:
 - [ ] Main Goal: SSR Articles, make most of rakede work w/o JS
+  - [ ] convert markdown w/ frontmatter to json, load needed data as async component
+  - [ ] store user input in nedb out of the box
+  - [ ] choose your own database when needed
 - [ ] article editor
   - simplemde markdown editor
   - anonymous pull-req via github api or authenticated merge
@@ -9,26 +12,28 @@
     - set price
     - choose your own
     - contact us
+  - waiting list
   - mass-mail
   - stastics
   - custom visitor questions, text/checkboxes
   - sub-wiki
+  - fahrplan
+  - visitor self service interface
+    - update data, cancel registration
 
 ## Fonts
 
-Raleway (Bold) R B SlantedI
+Lato (Bold) R B SlantedI
 Noto Serif R I B BI
 https://feathericons.com/
 
 
 ## Ideas
 
-- dynamic layouts with nuxt 0.10
 - article specific highlight color
-- pwa
 
 
-## Links
+## Links & Inspiration
 
 - https://github.com/jonschlinkert/gray-matter
 - https://github.com/NextStepWebs/simplemde-markdown-editor
