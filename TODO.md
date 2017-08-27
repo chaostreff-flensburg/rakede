@@ -31,7 +31,7 @@ https://feathericons.com/
 
 ## Ideas
 
-- article specific highlight color, color scheme logic based on hsv
+- article specific highlight color, color scheme logic based on hsl
 - popup articles from frontpage á la product hunt
 - dynamically loaded hover article previews
 
