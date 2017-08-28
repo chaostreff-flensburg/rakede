@@ -4,9 +4,9 @@
 
     <div id="featured-wiki">
       <!-- @TODO: fix layout on md display -->
-      <ArticleCard v-for="article in featured"
-                   :title="article.title"
-                   :content="article.html"
+      <ArticleCard v-for="article in featuredArticles"
+                   :title="article.data.title"
+                   :content="article.content"
                    :image="article.img"
                    :link="'/wiki/' + article.slug"
                    :key="article.slug"
@@ -30,14 +30,14 @@ export default {
       title: 'rakede'
     }
   },
-  asyncData(context) {
-    return axios.get('/api/wiki/featured')
-      .then((res) => {
-        return { featured: res.data }
-      })
-      .catch((e) => {
-        console.error(e)
-      })
+  async asyncData(context) {
+    let wikiFeature = await import('@/content/wiki/featured.json');
+    let articles = await Promise.all(wikiFeature.featured.map(async (slug) => {
+      let article = await import(`@/content/json/wiki/${slug}.json`);
+      article.slug = slug;
+      return article;
+    }));
+    return { featuredArticles: articles }
   }
 }
 </script>

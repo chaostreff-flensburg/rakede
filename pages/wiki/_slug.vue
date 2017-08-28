@@ -1,7 +1,7 @@
 <template>
   <section class="container">
-    <h1>{{article.title}}</h1>
-    <div v-html="article.html"></div>
+    <h1>{{data.title}}</h1>
+    <div v-html="content"></div>
   </section>
 </template>
 
@@ -10,14 +10,9 @@ import axios from '~/plugins/axios'
 
 export default {
   name: 'slug',
-  asyncData(context) {
-    return axios.get('/api/wiki/' + context.params.slug)
-    .then((res) => {
-      return { article: res.data }
-    })
-    .catch((e) => {
-      context.error({ statusCode: 404, message: 'Article not found' })
-    })
+  async asyncData(context) {
+    let data = await import(`@/content/json/wiki/${context.route.params.slug}`);
+    return data;
   }
 }
 </script>
