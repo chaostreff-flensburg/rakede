@@ -13,6 +13,7 @@
     - set price
     - choose your own
     - contact us
+    - voucher
   - waiting list
   - mass-mail
   - stastics
