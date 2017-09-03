@@ -17,8 +17,6 @@
 </template>
 
 <script>
-import axios from '~/plugins/axios'
-
 import ArticleCard from '~/components/article-card.vue';
 
 export default {
