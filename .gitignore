@@ -1,6 +1,22 @@
-rethinkdb_data
+# ide
+.idea
+.vscode
+
+# dependencies
 node_modules
-config/tokens.json
-.jshintrc
-public/upload/
-.nuxt/
+
+# logs
+npm-debug.log
+
+# Nuxt build
+.nuxt
+
+# Nuxt generate
+dist
+
+# Backpack build
+build
+
+# Content folders
+content
+db

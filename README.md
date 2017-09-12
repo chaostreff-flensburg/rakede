@@ -2,30 +2,22 @@
 
 ## Getting Started
 
-To run rakede you need an instance of RethinkDB and a somewhat up to date version of node. On macOS with Homebrew or your favorite linux-distro with linuxbrew run:
+``` bash
+# node >= 8.0.0 needed
+# if you are on an older version:
+# npm i -g n && n stable
 
-    brew install rethinkdb
-    rethinkdb
+# install dependencies
+$ npm install # Or yarn install
 
-You can find documentation on installing RethinkDB with your package manager of choice [in the RethinkDB documentation](https://www.rethinkdb.com/docs/install/). It runs on pretty much everything.  
-After that clone the repo, `cd` into it and run:
+# serve with hot reload at localhost:3000
+$ npm run dev
 
-    npm install
+# build for production and launch server
+$ npm start
+```
 
-You need credentials for your OAuth Provider. Insert them in a `token.json` like this:
-
-
-    {
-      "clientID": "$YOUR_CLIENT_ID",
-      "clientSecret": "$YOUR_SECRET",
-      "callbackURL":  "http://localhost:8081/login/callback"
-    }
-
-Now you can finally start the app with:
-
-    npm start
-
-The rakede now fires up its engines and reloads automatically on file changes. You can find your instance running on [localhost:8081](http://localhost:8081/).
+For detailed explanation on how things work, checkout the [Nuxt.js docs](https://github.com/nuxt/nuxt.js).
 
 ## Changelog
 
@@ -36,3 +28,7 @@ __0.0.0__
 ## License
 
 Licensed under the [MIT license](LICENSE).
+
+## Backpack
+
+We use [backpack](https://github.com/palmerhq/backpack) to watch and build the application, so you can use the latest ES6 features (module syntax, async/await, etc.).

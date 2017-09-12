@@ -2,41 +2,48 @@
   "name": "rakede",
   "version": "0.0.1",
   "description": "intergalactic organization communication",
-  "main": "app.js",
+  "author": "Thorben Dittmar <roikiermedia@users.noreply.github.com>",
+  "license": "MIT",
   "scripts": {
-    "start": "nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "backpack dev",
+    "build": "nuxt build && backpack build",
+    "start": "cross-env NODE_ENV=production node build/main.js",
+    "generate": "nuxt generate",
+    "parse": "node ./utils/parse-content.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/roikiermedia/rakede.git"
+    "url": "https://github.com/chaostreff-flensburg/rakede.git"
   },
-  "author": "Chaostreff Flensburg e.V.",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/chaostreff-flensburg/rakede/issues"
   },
   "homepage": "https://github.com/chaostreff-flensburg/rakede",
   "private": true,
   "dependencies": {
-    "body-parser": "^1.1.2",
-    "cookie-parser": "^1.4.3",
-    "errorhandler": "^1.0.1",
-    "express": "^4.14.0",
-    "express-handlebars": "^3.0.0",
-    "express-session": "^1.14.0",
-    "lodash": "^4.1.0",
-    "method-override": "^1.0.0",
-    "moment": "^2.14.1",
-    "multer": "^1.2.0",
-    "nodemailer": "^2.5.0",
-    "passport": "^0.3.2",
-    "passport-slack-ponycode": "^0.0.2",
-    "rethinkdb": "^2.2.1",
-    "slug": "^0.9.1",
-    "socket.io": "^1.4.5"
+    "axios": "^0.16.2",
+    "body-parser": "^1.18.0",
+    "cross-env": "^5.0.0",
+    "express": "^4.15.3",
+    "fs-readdir-recursive": "^1.0.0",
+    "gray-matter": "^2.1.1",
+    "marked": "^0.3.6",
+    "nedb": "^1.8.0",
+    "nuxt": "^1.0.0-rc11",
+    "source-map-support": "^0.4.18"
   },
   "devDependencies": {
-    "nodemon": "^1.10.0"
+    "babel-eslint": "^7.2.3",
+    "backpack-core": "^0.3.0",
+    "eslint": "^3.19.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-loader": "^1.7.1",
+    "eslint-plugin-html": "^2.0.3",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-node": "^4.2.2",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "node-sass": "^4.5.3",
+    "sass-loader": "^6.0.6"
   }
 }

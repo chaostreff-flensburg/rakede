@@ -1,2 +1,0 @@
-curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"author" : "autor", "content" : "inhalt", "title" : "titel", "category" : 0}
-' 127.0.0.1:8081/blog/createBlogPost
