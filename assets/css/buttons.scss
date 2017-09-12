@@ -1,0 +1,51 @@
+button, .btn {
+  align-self: center;
+
+  margin: 8px;
+  padding: 12px 14px;
+
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  letter-spacing: 0.08em;
+
+  border-style: none;
+  border-radius: 2px;
+  background-color: #ffffff;
+  box-shadow: 0 0px 6px 0 hsla(0,0,0,0.3);
+
+  font-size: 14px;
+  font-weight: 900;
+  color: hsla(0,0,0,0.7);
+
+  &:hover {
+    box-shadow: 0 4px 10px 0 hsla(0,0,0,0.3);
+    transform: translateY(-1px);
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+@for $i from 0 through 36 {
+  .btn-#{$i} {
+    @extend .btn;
+
+    @if $i < 5 { color: hsla(0, 0%, 100%, 0.925);}
+    @if $i > 18 { color: hsla(0, 0%, 100%, 0.925);}
+    background-color: hsl($i*10, 100, 50);
+    background: linear-gradient(177.5deg, hsl($i*10, 100, 50) -100%, hsla($i*10+10, 100, 55, 70) 200%);
+
+    // color shadows
+    // box-shadow: 0 0px 6px 0 hsla($i*10, 90, 55, 0.4);
+
+    &:hover {
+      box-shadow: 0 4px 10px 0 hsla($i*10+10, 100, 35, 0.4);
+    }
+  }
+
+  // .btn-outline-#{$i} {
+  //   @extend .btn;
+  //
+  //   // @TODO: outline buttons
+  // }
+}
