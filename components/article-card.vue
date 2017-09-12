@@ -41,8 +41,6 @@ export default {
   display: flex;
   justify-content: space-around;
 
-  min-width: 370px;
-
   padding: 0 16px;
   padding-left: 0;
 
