@@ -22,13 +22,15 @@
   "private": true,
   "dependencies": {
     "axios": "^0.16.2",
+    "body-parser": "^1.18.0",
     "cross-env": "^5.0.0",
     "express": "^4.15.3",
     "fs-readdir-recursive": "^1.0.0",
     "gray-matter": "^2.1.1",
     "marked": "^0.3.6",
-    "nuxt": "^1.0.0-rc6",
-    "source-map-support": "^0.4.15"
+    "nedb": "^1.8.0",
+    "nuxt": "^1.0.0-rc11",
+    "source-map-support": "^0.4.18"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
