@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1>weekendhack</h1>
     <nuxt/>
   </div>
 </template>
