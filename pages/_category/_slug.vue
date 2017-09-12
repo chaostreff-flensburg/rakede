@@ -1,7 +1,7 @@
 <template>
   <section class="container">
     <h1>{{data.title}}</h1>
-    <div v-html="content"></div>
+    <article v-html="content"></article>
   </section>
 </template>
 
@@ -10,7 +10,7 @@
 export default {
   name: 'slug',
   async asyncData(context) {
-    let data = await import(`@/content/json/wiki/${context.route.params.slug}`);
+    let data = await import(`@/content/json/${context.route.params.category}/${context.route.params.slug}`);
     return data;
   }
 }
