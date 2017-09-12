@@ -7,21 +7,6 @@
 - [ ] article editor
   - simplemde markdown editor
   - anonymous pull-req via github api or authenticated merge
-- [ ] events
-  - generate event from md/json
-  - multiple ticket types
-    - set price
-    - choose your own
-    - contact us
-    - voucher
-  - waiting list
-  - mass-mail
-  - stastics
-  - custom visitor questions, text/checkboxes
-  - sub-wiki
-  - fahrplan
-  - visitor self service interface
-    - update data, cancel registration
 
 ## Fonts
 
