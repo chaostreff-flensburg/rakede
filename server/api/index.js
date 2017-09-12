@@ -1,10 +1,10 @@
 import { Router } from 'express'
 
-import wiki from './wiki'
+// import wiki from './wiki'
 
 var router = Router()
 
 // Add Routes
-router.use(wiki)
+// router.use(wiki)
 
 export default router
