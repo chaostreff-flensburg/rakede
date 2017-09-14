@@ -1,6 +1,7 @@
 ![rakede](./docs/rakede-logo.png)
 
-[![Build Status](https://drone.ctfl.space/api/badges/chaostreff-flensburg/rakede/status.svg?branch=master)](https://drone.ctfl.space/chaostreff-flensburg/rakede)
+dev: [![Build Status](https://drone.ctfl.space/api/badges/chaostreff-flensburg/rakede/status.svg?branch=dev)](https://drone.ctfl.space/chaostreff-flensburg/rakede)  
+master: [![Build Status](https://drone.ctfl.space/api/badges/chaostreff-flensburg/rakede/status.svg?branch=master)](https://drone.ctfl.space/chaostreff-flensburg/rakede)
 
 ## Getting Started
 
