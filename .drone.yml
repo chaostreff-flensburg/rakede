@@ -15,5 +15,7 @@ pipeline:
       - cp -a ./dist/. /var/www/devrakede/
     volumes:
       - /var/www/devrakede:/var/www/devrakede
+    when:
+      branch: dev
 
 branches: [master, dev, feature/*, bug/*, hotfix/*]
