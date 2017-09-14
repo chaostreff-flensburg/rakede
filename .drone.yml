@@ -2,10 +2,12 @@ pipeline:
   install:
     image: node:8.5
     commands:
+      - git clone https://github.com/chaostreff-flensburg/wiki.git content
       - npm i
   build:
     image: node:8.5
     commands:
+      - npm run parse
       - npm run build
       - npm run generate
 
