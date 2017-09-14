@@ -2,7 +2,7 @@ pipeline:
   build:
     image: node:8.5
     commands:
-      - npm install
+      - npm i
       - npm generate
 
 branches: [master, dev]
