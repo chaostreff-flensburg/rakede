@@ -1,5 +1,7 @@
 ![rakede](./docs/rakede-logo.png)
 
+[![Build Status](https://drone.ctfl.space/api/badges/chaostreff-flensburg/rakede/status.svg?branch=master)](https://drone.ctfl.space/chaostreff-flensburg/rakede)
+
 ## Getting Started
 
 ``` bash
