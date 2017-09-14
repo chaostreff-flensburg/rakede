@@ -12,7 +12,7 @@ pipeline:
   stage:
     image: node:8.5
     commands:
-      - cp -a ./dist/. /var/www/devrakede/
+      - cp -a -u ./dist/. /var/www/devrakede/
     volumes:
       - /var/www/devrakede:/var/www/devrakede
     when:
