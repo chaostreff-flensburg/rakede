@@ -9,5 +9,11 @@ pipeline:
     commands:
       - npm run parse
       - npm run generate
+  stage:
+    image: node:8.5
+    commands:
+      - cp -a ./dist/. /var/www/devrakede/
+    volumes:
+      - /var/www/devrakede:/var/www/devrakede
 
 branches: [master, dev, feature/*, bug/*, hotfix/*]
