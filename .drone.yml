@@ -8,7 +8,6 @@ pipeline:
     image: node:8.5
     commands:
       - npm run parse
-      - npm run build
       - npm run generate
 
 branches: [master, dev, feature/*, bug/*, hotfix/*]
