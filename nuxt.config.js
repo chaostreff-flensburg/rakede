@@ -3,11 +3,11 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: 'starter',
+    title: 'Chaostreff Flensburg e.V.',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Nuxt.js project' }
+      { hid: 'description', name: 'description', content: 'Hackerspace & Makerplace' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -30,5 +30,12 @@ module.exports = {
     ** Run ESLINT on save
     */
     extend (config, ctx) {}
+  },
+  generate: {
+    routes: [
+      '/event/weekendhack0x3/',
+      '/wiki/impressum',
+      '/wiki/wir'
+    ]
   }
 }

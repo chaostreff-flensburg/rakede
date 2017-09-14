@@ -19,4 +19,5 @@ build
 
 # Content folders
 content
+content.example
 db
