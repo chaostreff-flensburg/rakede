@@ -1,8 +1,12 @@
 pipeline:
-  build:
+  install:
     image: node:8.5
     commands:
       - npm i
-      - npm generate
+  build:
+    image: node:8.5
+    commands:
+      - npm run build
+      - npm run generate
 
 branches: [master, dev]
