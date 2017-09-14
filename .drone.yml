@@ -1,8 +1,29 @@
 pipeline:
+  install:
+    image: node:8.5
+    commands:
+      - git clone https://github.com/chaostreff-flensburg/wiki.git content
+      - npm i
   build:
     image: node:8.5
     commands:
-      - npm i
-      - npm generate
+      - npm run parse
+      - npm run generate
+  stage:
+    image: node:8.5
+    commands:
+      - cp -a -u ./dist/. /var/www/devrakede/
+    volumes:
+      - /var/www/devrakede:/var/www/devrakede
+    when:
+      branch: dev
+  deploy:
+    image: node:8.5
+    commands:
+      - cp -a -u ./dist/. /var/www/rakede/
+    volumes:
+      - /var/www/rakede:/var/www/rakede
+    when:
+      branch: master
 
-branches: [master, dev]
+branches: [master, dev, feature/*, bug/*, hotfix/*]
