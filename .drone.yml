@@ -9,4 +9,4 @@ pipeline:
       - npm run build
       - npm run generate
 
-branches: [master, dev]
+branches: [master, dev, feature/*, bug/*, hotfix/*]
