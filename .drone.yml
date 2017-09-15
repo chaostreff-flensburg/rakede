@@ -17,6 +17,7 @@ pipeline:
       - /var/www/devrakede:/var/www/devrakede
     when:
       branch: dev
+      event: push
   deploy:
     image: node:8.5
     commands:
@@ -25,5 +26,6 @@ pipeline:
       - /var/www/rakede:/var/www/rakede
     when:
       branch: master
+      event: push
 
 branches: [master, dev, feature/*, bug/*, hotfix/*]
