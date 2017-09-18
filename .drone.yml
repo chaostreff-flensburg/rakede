@@ -3,7 +3,7 @@ pipeline:
     image: node:8.5
     commands:
       - git clone https://github.com/chaostreff-flensburg/wiki.git content
-      - npm i
+      - npm install --no-shrinkwrap
   build:
     image: node:8.5
     commands:
