@@ -1,16 +1,16 @@
 pipeline:
   install:
-    image: node:8.5
+    image: node:8.5-alpine
     commands:
       - git clone https://github.com/chaostreff-flensburg/wiki.git content
       - npm install --no-shrinkwrap
   build:
-    image: node:8.5
+    image: node:8.5-alpine
     commands:
       - npm run parse
       - npm run generate
   stage:
-    image: node:8.5
+    image: node:8.5-alpine
     commands:
       - cp -a -u ./dist/. /var/www/devrakede/
     volumes:
@@ -19,7 +19,7 @@ pipeline:
       branch: dev
       event: push
   deploy:
-    image: node:8.5
+    image: node:8.5-alpine
     commands:
       - cp -a -u ./dist/. /var/www/rakede/
     volumes:
