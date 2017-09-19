@@ -45,5 +45,8 @@
     "eslint-plugin-standard": "^3.0.1",
     "node-sass": "^4.5.3",
     "sass-loader": "^6.0.6"
+  },
+  "nodeSassConfig": {
+    "binarySite": "https://npm.taobao.org/mirrors/node-sass/"
   }
 }
